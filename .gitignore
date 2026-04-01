@@ -1,0 +1,31 @@
+# Logs and Output
+logs/
+data/
+tmp/
+backup/
+*/backup/
+*.log
+*.json
+*.bak
+*.bak_*
+!okx_config.json
+!v9.3_params.json
+
+# If you have specific .json you WANT to keep, uncomment them.
+# For now, by default I exclude v93_trades_paper.json and other trade histories.
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+.env
+
+# Config Secrets
+config/api_config.py
+
+# VS Code / IDE
+.vscode/
+.idea/
+.DS_Store
