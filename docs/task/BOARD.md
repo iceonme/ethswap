@@ -2,6 +2,7 @@
 
 ## TODO
 ## DONE
+- [x] [2026-04-02] GitHub 仓库迁移与上传更新：修复 .git 路径并提交 v1.18 稳定版 ([归档](file:///c:/Projects/ethswap/docs/task/history/2026-04-02_00-15_github_upload_and_fix.md))
 - [x] [2026-04-02] 全面本地化：将图表、状态栏及日志对齐至北京时间 (UTC+8) (v1.18) ([归档](file:///c:/Projects/ethswap/docs/task/history/2026-04-02_00-10_beijing_time_v118.md))
 - [x] [2026-04-01] 终极交付：解决 8小时偏移、刷新断层、联动及 启动 NameError 全故障 (v1.15) ([归档](file:///c:/Projects/ethswap/docs/task/history/2026-04-01_23-59_ultimate_stable_v115.md))
 - [x] [2026-04-01] 彻底修复 Dashboard 联动、收益率、交易标志与记录丢失问题 ([归档](file:///c:/Projects/ethswap/docs/task/history/2026-04-01_22-00_dashboard_sync_and_visual_fix.md))

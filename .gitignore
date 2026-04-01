@@ -1,8 +1,9 @@
 # Logs and Output
 logs/
-data/
+!data/
+!data/*.json
 tmp/
-backup/
+# backup/
 */backup/
 *.log
 *.json
@@ -10,6 +11,8 @@ backup/
 *.bak_*
 !okx_config.json
 !v9.3_params.json
+!data/
+!data/*.json
 
 # If you have specific .json you WANT to keep, uncomment them.
 # For now, by default I exclude v93_trades_paper.json and other trade histories.
