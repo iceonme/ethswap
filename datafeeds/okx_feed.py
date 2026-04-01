@@ -7,13 +7,13 @@ from typing import Iterator, Optional
 
 from core.types import MarketData
 from .base import BaseDataFeed
-from config.okx_config import OKXAPI
+from infra.okx.client import OKXClient
 
 class OKXDataFeed(BaseDataFeed):
     def __init__(self, 
                  symbol: str = "ETH-USDT-SWAP",
                  timeframe: str = "1m",
-                 api: Optional[OKXAPI] = None,
+                 api: Optional[OKXClient] = None,
                  api_key: Optional[str] = None,
                  api_secret: Optional[str] = None,
                  passphrase: Optional[str] = None,
@@ -27,7 +27,7 @@ class OKXDataFeed(BaseDataFeed):
         if api:
             self.api = api
         else:
-            self.api = OKXAPI(
+            self.api = OKXClient(
                 api_key=api_key,
                 api_secret=api_secret,
                 passphrase=passphrase,
@@ -67,7 +67,7 @@ class OKXDataFeed(BaseDataFeed):
                         high=float(current['high']),
                         low=float(current['low']),
                         close=float(current['close']),
-                        volume=float(current['volume'])
+                        volume=float(current['vol'])
                     )
                     
                     self._notify_data(data)

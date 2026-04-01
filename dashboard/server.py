@@ -1,14 +1,14 @@
-import eventlet
-eventlet.monkey_patch()
-
 import threading
 import json
-from datetime import datetime
+import logging
+import time
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 
 from flask import Flask, render_template, jsonify, make_response
 from flask_socketio import SocketIO, emit
 
+logger = logging.getLogger('Dashboard')
 
 class DashboardServer:
     """
@@ -26,13 +26,19 @@ class DashboardServer:
         
         # Flask 应用
         import os
-        template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-        self.app = Flask(__name__, template_folder=template_dir)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        template_dir = os.path.join(base_dir, 'templates')
+        static_dir = os.path.join(base_dir, 'static')
+        self.app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
         self.app.config['SECRET_KEY'] = 'cts1-secret-key'
         self.app.config['TEMPLATES_AUTO_RELOAD'] = True  # 开启模板自动重载
         
-        # SocketIO (自动检测 eventlet/gevent/threading)
-        self.socketio = SocketIO(self.app, cors_allowed_origins="*")
+        # SocketIO (强制使用 threading 模式避开 eventlet 在 Windows 下的兼容性问题)
+        self.socketio = SocketIO(self.app, 
+                                 cors_allowed_origins="*", 
+                                 async_mode='threading', # Windows下线程模式最稳定
+                                 ping_timeout=10,
+                                 ping_interval=5)
         
         # 数据缓存
         self._data: Dict[str, Any] = {
@@ -57,7 +63,7 @@ class DashboardServer:
         """设置路由"""
         
         # 版本号 - 每次修改前端代码后更新
-        self.version = "v4.0-Innovation-v1.1"
+        self.version = "v4.0-Innovation-v1.12"
         # 获取 template_dir 的逻辑在 __init__ 中，这里我们重新获取一下用于调试
         import os
         td = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -146,10 +152,6 @@ class DashboardServer:
     def update(self, data: Dict[str, Any]):
         """更新数据并推送到前端"""
         try:
-            # DEBUG
-            if 'history_candles' in data:
-                print(f"[DashboardServer] update 收到 {len(data['history_candles'])} 根 K 线")
-            
             # 2025-03-23 优化：支持全量历史同步和增量实时更新
             # 1. K 线处理
             if 'history_candles' in data:
@@ -222,6 +224,10 @@ class DashboardServer:
                     if not any(d.get('meta', {}).get('ord_id') == ord_id for d in trades):
                         trades.append(t)
                         self._data['trade_history'] = trades[-500:]
+            
+            # 特殊处理初始资金
+            if 'initial_balance' in data:
+                self._data['initial_balance'] = data['initial_balance']
             
             # 限制交易历史长度
             if 'trade_history' in self._data and isinstance(self._data['trade_history'], list):
