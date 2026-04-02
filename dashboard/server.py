@@ -38,7 +38,9 @@ class DashboardServer:
                                  cors_allowed_origins="*", 
                                  async_mode='threading', # Windows下线程模式最稳定
                                  ping_timeout=10,
-                                 ping_interval=5)
+                                 ping_interval=5,
+                                 logger=False,           # 禁用内部日志，提高 Werkzeug 3.1 兼容性
+                                 engineio_logger=False)
         
         # 数据缓存
         self._data: Dict[str, Any] = {
@@ -88,6 +90,11 @@ class DashboardServer:
         @self.app.route('/favicon.ico')
         def favicon():
             return '', 204
+            
+        @self.app.errorhandler(404)
+        def handle_404(e):
+            """显式 404 处理器，防止 Werkzeug 3.x 默认错误响应导致 write() 冲突"""
+            return jsonify(error="Not Found"), 404
     
     def _setup_socketio(self):
         """设置 WebSocket 事件"""

@@ -1,0 +1,25 @@
+{
+    "timestamp": "2026-04-01T16:00:02.414568+00:00",
+    "grid_top": 2153.7733333333335,
+    "grid_bottom": 2103.7733333333335,
+    "entity_grids": [
+        2103.7733333333335,
+        2120.44,
+        2137.106666666667,
+        2153.7733333333335
+    ],
+    "virtual_grids": [
+        2087.106666666667,
+        2170.44
+    ],
+    "daily_reset_count": 0,
+    "breakout_triggered": false,
+    "breakout_time": null,
+    "no_grid_triggered": false,
+    "last_entry_time": 1775051000.961092,
+    "occupied_long_layers": [
+        0,
+        -1
+    ],
+    "occupied_short_layers": []
+}

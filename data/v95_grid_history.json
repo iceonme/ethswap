@@ -1,166 +1,3368 @@
 [
     {
-        "timestamp": "2026-04-01T09:16:38.995259+00:00",
-        "grid_top": 2155.7433333333333,
-        "grid_bottom": 2105.7433333333333,
+        "timestamp": "2026-04-01T16:42:17.119429+00:00",
+        "grid_top": 2152.9283333333333,
+        "grid_bottom": 2102.9283333333333,
         "entity_grids": [
-            2105.7433333333333,
-            2122.41,
-            2139.076666666667,
-            2155.7433333333333
+            2102.9283333333333,
+            2119.595,
+            2136.2616666666668,
+            2152.9283333333333
         ],
         "virtual_grids": [
-            2089.076666666667,
-            2172.41
+            2086.2616666666668,
+            2169.595
         ],
         "daily_reset_count": 0,
         "breakout_triggered": false,
         "breakout_time": null,
         "no_grid_triggered": false,
-        "last_entry_time": 0.0,
-        "occupied_long_layers": [],
-        "occupied_short_layers": []
-    },
-    {
-        "timestamp": "2026-04-01T12:00:02.872796+00:00",
-        "grid_top": 2159.675,
-        "grid_bottom": 2109.675,
-        "entity_grids": [
-            2109.675,
-            2126.3416666666667,
-            2143.0083333333337,
-            2159.675
-        ],
-        "virtual_grids": [
-            2093.0083333333337,
-            2176.3416666666667
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775040835.0913093,
-        "occupied_long_layers": [],
-        "occupied_short_layers": []
-    },
-    {
-        "timestamp": "2026-04-01T12:35:37.962080+00:00",
-        "grid_top": 2158.6233333333334,
-        "grid_bottom": 2108.6233333333334,
-        "entity_grids": [
-            2108.6233333333334,
-            2125.29,
-            2141.956666666667,
-            2158.6233333333334
-        ],
-        "virtual_grids": [
-            2091.956666666667,
-            2175.29
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775046934.1456707,
+        "last_entry_time": 1775061731.3789973,
         "occupied_long_layers": [],
         "occupied_short_layers": [
             2
         ]
     },
     {
-        "timestamp": "2026-04-01T13:03:35.810908+00:00",
-        "grid_top": 2159.4733333333334,
-        "grid_bottom": 2109.4733333333334,
+        "timestamp": "2026-04-01T16:55:45.047229+00:00",
+        "grid_top": 2154.7166666666667,
+        "grid_bottom": 2104.7166666666667,
         "entity_grids": [
-            2109.4733333333334,
-            2126.14,
-            2142.806666666667,
-            2159.4733333333334
+            2104.7166666666667,
+            2121.383333333333,
+            2138.05,
+            2154.7166666666667
         ],
         "virtual_grids": [
-            2092.806666666667,
-            2176.14
+            2088.05,
+            2171.383333333333
         ],
         "daily_reset_count": 0,
         "breakout_triggered": false,
         "breakout_time": null,
         "no_grid_triggered": false,
-        "last_entry_time": 1775048613.262509,
+        "last_entry_time": 1775062540.4966004,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            2
+        ]
+    },
+    {
+        "timestamp": "2026-04-01T20:00:01.929196+00:00",
+        "grid_top": 2157.475,
+        "grid_bottom": 2107.475,
+        "entity_grids": [
+            2107.475,
+            2124.1416666666664,
+            2140.8083333333334,
+            2157.475
+        ],
+        "virtual_grids": [
+            2090.8083333333334,
+            2174.1416666666664
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775071797.3715336,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            2
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T00:00:01.263728+00:00",
+        "grid_top": 2165.0466666666666,
+        "grid_bottom": 2115.0466666666666,
+        "entity_grids": [
+            2115.0466666666666,
+            2131.713333333333,
+            2148.38,
+            2165.0466666666666
+        ],
+        "virtual_grids": [
+            2098.38,
+            2181.713333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775076763.8344603,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            2
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:28.345861+00:00",
+        "grid_top": 2187.6016666666665,
+        "grid_bottom": 2137.6016666666665,
+        "entity_grids": [
+            2137.6016666666665,
+            2154.268333333333,
+            2170.935,
+            2187.6016666666665
+        ],
+        "virtual_grids": [
+            2120.935,
+            2204.268333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094867.200421,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:29.994659+00:00",
+        "grid_top": 2201.371666666667,
+        "grid_bottom": 2151.371666666667,
+        "entity_grids": [
+            2151.371666666667,
+            2168.0383333333334,
+            2184.7050000000004,
+            2201.371666666667
+        ],
+        "virtual_grids": [
+            2134.7050000000004,
+            2218.0383333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094868.3637853,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:31.464454+00:00",
+        "grid_top": 2205.5216666666665,
+        "grid_bottom": 2155.5216666666665,
+        "entity_grids": [
+            2155.5216666666665,
+            2172.188333333333,
+            2188.855,
+            2205.5216666666665
+        ],
+        "virtual_grids": [
+            2138.855,
+            2222.188333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094870.0118213,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:33.346043+00:00",
+        "grid_top": 2193.5183333333334,
+        "grid_bottom": 2143.5183333333334,
+        "entity_grids": [
+            2143.5183333333334,
+            2160.185,
+            2176.851666666667,
+            2193.5183333333334
+        ],
+        "virtual_grids": [
+            2126.851666666667,
+            2210.185
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094871.4817867,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:34.868651+00:00",
+        "grid_top": 2192.753333333333,
+        "grid_bottom": 2142.753333333333,
+        "entity_grids": [
+            2142.753333333333,
+            2159.4199999999996,
+            2176.0866666666666,
+            2192.753333333333
+        ],
+        "virtual_grids": [
+            2126.0866666666666,
+            2209.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094873.3632455,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:36.424019+00:00",
+        "grid_top": 2187.4566666666665,
+        "grid_bottom": 2137.4566666666665,
+        "entity_grids": [
+            2137.4566666666665,
+            2154.123333333333,
+            2170.79,
+            2187.4566666666665
+        ],
+        "virtual_grids": [
+            2120.79,
+            2204.123333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094874.8892353,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:37.964325+00:00",
+        "grid_top": 2165.3383333333336,
+        "grid_bottom": 2115.3383333333336,
+        "entity_grids": [
+            2115.3383333333336,
+            2132.005,
+            2148.671666666667,
+            2165.3383333333336
+        ],
+        "virtual_grids": [
+            2098.671666666667,
+            2182.005
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T07:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094876.4437568,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:39.385130+00:00",
+        "grid_top": 2122.1816666666664,
+        "grid_bottom": 2072.1816666666664,
+        "entity_grids": [
+            2072.1816666666664,
+            2088.848333333333,
+            2105.515,
+            2122.1816666666664
+        ],
+        "virtual_grids": [
+            2055.515,
+            2138.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T09:31:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094877.9876876,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:39.593720+00:00",
+        "grid_top": 2122.996666666667,
+        "grid_bottom": 2072.996666666667,
+        "entity_grids": [
+            2072.996666666667,
+            2089.6633333333334,
+            2106.3300000000004,
+            2122.996666666667
+        ],
+        "virtual_grids": [
+            2056.3300000000004,
+            2139.6633333333334
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094879.4025657,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:41.176317+00:00",
+        "grid_top": 2096.64,
+        "grid_bottom": 2046.6399999999999,
+        "entity_grids": [
+            2046.6399999999999,
+            2063.3066666666664,
+            2079.9733333333334,
+            2096.64
+        ],
+        "virtual_grids": [
+            2029.9733333333331,
+            2113.3066666666664
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094879.6119845,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:42.765832+00:00",
+        "grid_top": 2084.876666666667,
+        "grid_bottom": 2034.876666666667,
+        "entity_grids": [
+            2034.876666666667,
+            2051.5433333333335,
+            2068.2100000000005,
+            2084.876666666667
+        ],
+        "virtual_grids": [
+            2018.2100000000003,
+            2101.5433333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094881.198348,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:44.227088+00:00",
+        "grid_top": 2085.6633333333334,
+        "grid_bottom": 2035.6633333333334,
+        "entity_grids": [
+            2035.6633333333334,
+            2052.33,
+            2068.996666666667,
+            2085.6633333333334
+        ],
+        "virtual_grids": [
+            2018.9966666666667,
+            2102.33
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094882.7839146,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:45.819833+00:00",
+        "grid_top": 2088.05,
+        "grid_bottom": 2038.0500000000002,
+        "entity_grids": [
+            2038.0500000000002,
+            2054.7166666666667,
+            2071.3833333333337,
+            2088.05
+        ],
+        "virtual_grids": [
+            2021.3833333333334,
+            2104.7166666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094884.2593057,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:47.470912+00:00",
+        "grid_top": 2086.753333333333,
+        "grid_bottom": 2036.753333333333,
+        "entity_grids": [
+            2036.753333333333,
+            2053.4199999999996,
+            2070.0866666666666,
+            2086.753333333333
+        ],
+        "virtual_grids": [
+            2020.0866666666664,
+            2103.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094885.840068,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:49.081897+00:00",
+        "grid_top": 2069.0249999999996,
+        "grid_bottom": 2019.0249999999999,
+        "entity_grids": [
+            2019.0249999999999,
+            2035.6916666666664,
+            2052.358333333333,
+            2069.0249999999996
+        ],
+        "virtual_grids": [
+            2002.3583333333333,
+            2085.691666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-27T10:38:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094887.4974692,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:50.071909+00:00",
+        "grid_top": 2016.1733333333336,
+        "grid_bottom": 1966.1733333333336,
+        "entity_grids": [
+            1966.1733333333336,
+            1982.8400000000004,
+            1999.506666666667,
+            2016.1733333333336
+        ],
+        "virtual_grids": [
+            1949.506666666667,
+            2032.8400000000004
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-27T12:00:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094889.1035364,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:50.868973+00:00",
+        "grid_top": 2012.7883333333334,
+        "grid_bottom": 1962.7883333333334,
+        "entity_grids": [
+            1962.7883333333334,
+            1979.4550000000002,
+            1996.1216666666667,
+            2012.7883333333334
+        ],
+        "virtual_grids": [
+            1946.1216666666667,
+            2029.4550000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094890.0934958,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:52.748840+00:00",
+        "grid_top": 2011.175,
+        "grid_bottom": 1961.175,
+        "entity_grids": [
+            1961.175,
+            1977.8416666666667,
+            1994.5083333333332,
+            2011.175
+        ],
+        "virtual_grids": [
+            1944.5083333333332,
+            2027.8416666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094890.8883753,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:54.305967+00:00",
+        "grid_top": 2009.4099999999999,
+        "grid_bottom": 1959.4099999999999,
+        "entity_grids": [
+            1959.4099999999999,
+            1976.0766666666666,
+            1992.743333333333,
+            2009.4099999999999
+        ],
+        "virtual_grids": [
+            1942.743333333333,
+            2026.0766666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094892.7678382,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:56.017113+00:00",
+        "grid_top": 2012.4166666666665,
+        "grid_bottom": 1962.4166666666665,
+        "entity_grids": [
+            1962.4166666666665,
+            1979.0833333333333,
+            1995.7499999999998,
+            2012.4166666666665
+        ],
+        "virtual_grids": [
+            1945.7499999999998,
+            2029.0833333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094894.327886,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:54:58.421139+00:00",
+        "grid_top": 2017.6866666666665,
+        "grid_bottom": 1967.6866666666665,
+        "entity_grids": [
+            1967.6866666666665,
+            1984.3533333333332,
+            2001.0199999999998,
+            2017.6866666666665
+        ],
+        "virtual_grids": [
+            1951.0199999999998,
+            2034.3533333333332
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094896.0456555,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:00.082918+00:00",
+        "grid_top": 2024.1366666666668,
+        "grid_bottom": 1974.1366666666668,
+        "entity_grids": [
+            1974.1366666666668,
+            1990.8033333333335,
+            2007.47,
+            2024.1366666666668
+        ],
+        "virtual_grids": [
+            1957.47,
+            2040.8033333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094898.4429078,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:01.652683+00:00",
+        "grid_top": 2031.6066666666666,
+        "grid_bottom": 1981.6066666666666,
+        "entity_grids": [
+            1981.6066666666666,
+            1998.2733333333333,
+            2014.9399999999998,
+            2031.6066666666666
+        ],
+        "virtual_grids": [
+            1964.9399999999998,
+            2048.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094900.1033592,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:03.338516+00:00",
+        "grid_top": 2046.7416666666666,
+        "grid_bottom": 1996.7416666666666,
+        "entity_grids": [
+            1996.7416666666666,
+            2013.4083333333333,
+            2030.0749999999998,
+            2046.7416666666666
+        ],
+        "virtual_grids": [
+            1980.0749999999998,
+            2063.4083333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094901.672723,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:05.030600+00:00",
+        "grid_top": 2042.4633333333334,
+        "grid_bottom": 1992.4633333333334,
+        "entity_grids": [
+            1992.4633333333334,
+            2009.13,
+            2025.7966666666666,
+            2042.4633333333334
+        ],
+        "virtual_grids": [
+            1975.7966666666666,
+            2059.13
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094903.3578043,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:06.814250+00:00",
+        "grid_top": 2025.7233333333334,
+        "grid_bottom": 1975.7233333333334,
+        "entity_grids": [
+            1975.7233333333334,
+            1992.39,
+            2009.0566666666666,
+            2025.7233333333334
+        ],
+        "virtual_grids": [
+            1959.0566666666666,
+            2042.39
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094905.0570428,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:08.413978+00:00",
+        "grid_top": 2029.3283333333334,
+        "grid_bottom": 1979.3283333333334,
+        "entity_grids": [
+            1979.3283333333334,
+            1995.9950000000001,
+            2012.6616666666666,
+            2029.3283333333334
+        ],
+        "virtual_grids": [
+            1962.6616666666666,
+            2045.9950000000001
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094906.835003,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:09.978348+00:00",
+        "grid_top": 2026.0566666666666,
+        "grid_bottom": 1976.0566666666666,
+        "entity_grids": [
+            1976.0566666666666,
+            1992.7233333333334,
+            2009.3899999999999,
+            2026.0566666666666
+        ],
+        "virtual_grids": [
+            1959.3899999999999,
+            2042.7233333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094908.434964,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:11.552525+00:00",
+        "grid_top": 2020.19,
+        "grid_bottom": 1970.19,
+        "entity_grids": [
+            1970.19,
+            1986.8566666666668,
+            2003.5233333333333,
+            2020.19
+        ],
+        "virtual_grids": [
+            1953.5233333333333,
+            2036.8566666666668
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094909.9976766,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:13.116998+00:00",
+        "grid_top": 2019.4299999999998,
+        "grid_bottom": 1969.4299999999998,
+        "entity_grids": [
+            1969.4299999999998,
+            1986.0966666666666,
+            2002.763333333333,
+            2019.4299999999998
+        ],
+        "virtual_grids": [
+            1952.763333333333,
+            2036.0966666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094911.5708556,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:14.642410+00:00",
+        "grid_top": 2015.5533333333333,
+        "grid_bottom": 1965.5533333333333,
+        "entity_grids": [
+            1965.5533333333333,
+            1982.22,
+            1998.8866666666665,
+            2015.5533333333333
+        ],
+        "virtual_grids": [
+            1948.8866666666665,
+            2032.22
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-29T22:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094913.135092,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:16.223506+00:00",
+        "grid_top": 2033.1916666666666,
+        "grid_bottom": 1983.1916666666666,
+        "entity_grids": [
+            1983.1916666666666,
+            1999.8583333333333,
+            2016.5249999999999,
+            2033.1916666666666
+        ],
+        "virtual_grids": [
+            1966.5249999999999,
+            2049.858333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T03:18:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094914.6727898,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:18.031564+00:00",
+        "grid_top": 2070.0466666666666,
+        "grid_bottom": 2020.0466666666666,
+        "entity_grids": [
+            2020.0466666666666,
+            2036.7133333333334,
+            2053.38,
+            2070.0466666666666
+        ],
+        "virtual_grids": [
+            2003.3799999999999,
+            2086.713333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T07:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094916.2475529,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:19.675638+00:00",
+        "grid_top": 2081.9483333333337,
+        "grid_bottom": 2031.9483333333337,
+        "entity_grids": [
+            2031.9483333333337,
+            2048.6150000000002,
+            2065.281666666667,
+            2081.9483333333337
+        ],
+        "virtual_grids": [
+            2015.281666666667,
+            2098.6150000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094918.0543046,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:21.245823+00:00",
+        "grid_top": 2090.431666666667,
+        "grid_bottom": 2040.4316666666668,
+        "entity_grids": [
+            2040.4316666666668,
+            2057.0983333333334,
+            2073.7650000000003,
+            2090.431666666667
+        ],
+        "virtual_grids": [
+            2023.765,
+            2107.0983333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094919.6965406,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:22.877832+00:00",
+        "grid_top": 2075.6066666666666,
+        "grid_bottom": 2025.6066666666666,
+        "entity_grids": [
+            2025.6066666666666,
+            2042.2733333333333,
+            2058.94,
+            2075.6066666666666
+        ],
+        "virtual_grids": [
+            2008.9399999999998,
+            2092.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T19:57:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094921.2673101,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:24.441208+00:00",
+        "grid_top": 2053.3883333333333,
+        "grid_bottom": 2003.3883333333333,
+        "entity_grids": [
+            2003.3883333333333,
+            2020.055,
+            2036.7216666666666,
+            2053.3883333333333
+        ],
+        "virtual_grids": [
+            1986.7216666666666,
+            2070.055
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094922.8995807,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:26.320683+00:00",
+        "grid_top": 2075.583333333333,
+        "grid_bottom": 2025.583333333333,
+        "entity_grids": [
+            2025.583333333333,
+            2042.2499999999998,
+            2058.9166666666665,
+            2075.583333333333
+        ],
+        "virtual_grids": [
+            2008.9166666666663,
+            2092.2499999999995
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T03:05:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094924.4776387,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:28.180465+00:00",
+        "grid_top": 2087.9766666666665,
+        "grid_bottom": 2037.9766666666665,
+        "entity_grids": [
+            2037.9766666666665,
+            2054.643333333333,
+            2071.31,
+            2087.9766666666665
+        ],
+        "virtual_grids": [
+            2021.3099999999997,
+            2104.643333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094926.341141,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:29.803917+00:00",
+        "grid_top": 2065.148333333333,
+        "grid_bottom": 2015.148333333333,
+        "entity_grids": [
+            2015.148333333333,
+            2031.8149999999998,
+            2048.4816666666666,
+            2065.148333333333
+        ],
+        "virtual_grids": [
+            1998.4816666666663,
+            2081.8149999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T09:55:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094928.199769,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:31.352767+00:00",
+        "grid_top": 2074.9383333333335,
+        "grid_bottom": 2024.9383333333335,
+        "entity_grids": [
+            2024.9383333333335,
+            2041.6050000000002,
+            2058.271666666667,
+            2074.9383333333335
+        ],
+        "virtual_grids": [
+            2008.2716666666668,
+            2091.605
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T14:28:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094929.8325486,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:32.913359+00:00",
+        "grid_top": 2123.82,
+        "grid_bottom": 2073.82,
+        "entity_grids": [
+            2073.82,
+            2090.4866666666667,
+            2107.1533333333336,
+            2123.82
+        ],
+        "virtual_grids": [
+            2057.1533333333336,
+            2140.4866666666667
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T17:59:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094931.3736935,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:55:32.976597+00:00",
+        "grid_top": 2110.1816666666664,
+        "grid_bottom": 2060.1816666666664,
+        "entity_grids": [
+            2060.1816666666664,
+            2076.848333333333,
+            2093.515,
+            2110.1816666666664
+        ],
+        "virtual_grids": [
+            2043.5149999999996,
+            2126.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094932.9381168,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [
+            3
+        ]
+    },
+    {
+        "timestamp": "2026-04-02T01:58:01.074106+00:00",
+        "grid_top": 2184.588333333333,
+        "grid_bottom": 2134.588333333333,
+        "entity_grids": [
+            2134.588333333333,
+            2151.2549999999997,
+            2167.9216666666666,
+            2184.588333333333
+        ],
+        "virtual_grids": [
+            2117.9216666666666,
+            2201.2549999999997
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-24T23:59:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775094932.9381168,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:03.597005+00:00",
+        "grid_top": 2187.6016666666665,
+        "grid_bottom": 2137.6016666666665,
+        "entity_grids": [
+            2137.6016666666665,
+            2154.268333333333,
+            2170.935,
+            2187.6016666666665
+        ],
+        "virtual_grids": [
+            2120.935,
+            2204.268333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095081.10826,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:05.347164+00:00",
+        "grid_top": 2201.371666666667,
+        "grid_bottom": 2151.371666666667,
+        "entity_grids": [
+            2151.371666666667,
+            2168.0383333333334,
+            2184.7050000000004,
+            2201.371666666667
+        ],
+        "virtual_grids": [
+            2134.7050000000004,
+            2218.0383333333334
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095083.6197748,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:07.030150+00:00",
+        "grid_top": 2205.5216666666665,
+        "grid_bottom": 2155.5216666666665,
+        "entity_grids": [
+            2155.5216666666665,
+            2172.188333333333,
+            2188.855,
+            2205.5216666666665
+        ],
+        "virtual_grids": [
+            2138.855,
+            2222.188333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095085.36948,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:08.852438+00:00",
+        "grid_top": 2193.5183333333334,
+        "grid_bottom": 2143.5183333333334,
+        "entity_grids": [
+            2143.5183333333334,
+            2160.185,
+            2176.851666666667,
+            2193.5183333333334
+        ],
+        "virtual_grids": [
+            2126.851666666667,
+            2210.185
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095087.052284,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:10.339606+00:00",
+        "grid_top": 2192.753333333333,
+        "grid_bottom": 2142.753333333333,
+        "entity_grids": [
+            2142.753333333333,
+            2159.4199999999996,
+            2176.0866666666666,
+            2192.753333333333
+        ],
+        "virtual_grids": [
+            2126.0866666666666,
+            2209.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095088.8770542,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:11.978374+00:00",
+        "grid_top": 2187.4566666666665,
+        "grid_bottom": 2137.4566666666665,
+        "entity_grids": [
+            2137.4566666666665,
+            2154.123333333333,
+            2170.79,
+            2187.4566666666665
+        ],
+        "virtual_grids": [
+            2120.79,
+            2204.123333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095090.3613768,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:13.577377+00:00",
+        "grid_top": 2165.3383333333336,
+        "grid_bottom": 2115.3383333333336,
+        "entity_grids": [
+            2115.3383333333336,
+            2132.005,
+            2148.671666666667,
+            2165.3383333333336
+        ],
+        "virtual_grids": [
+            2098.671666666667,
+            2182.005
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T07:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095091.999815,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:15.112541+00:00",
+        "grid_top": 2122.1816666666664,
+        "grid_bottom": 2072.1816666666664,
+        "entity_grids": [
+            2072.1816666666664,
+            2088.848333333333,
+            2105.515,
+            2122.1816666666664
+        ],
+        "virtual_grids": [
+            2055.515,
+            2138.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T09:31:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095093.599548,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:15.344593+00:00",
+        "grid_top": 2122.996666666667,
+        "grid_bottom": 2072.996666666667,
+        "entity_grids": [
+            2072.996666666667,
+            2089.6633333333334,
+            2106.3300000000004,
+            2122.996666666667
+        ],
+        "virtual_grids": [
+            2056.3300000000004,
+            2139.6633333333334
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095095.149142,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:16.869901+00:00",
+        "grid_top": 2096.64,
+        "grid_bottom": 2046.6399999999999,
+        "entity_grids": [
+            2046.6399999999999,
+            2063.3066666666664,
+            2079.9733333333334,
+            2096.64
+        ],
+        "virtual_grids": [
+            2029.9733333333331,
+            2113.3066666666664
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095095.3657799,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:18.444464+00:00",
+        "grid_top": 2084.876666666667,
+        "grid_bottom": 2034.876666666667,
+        "entity_grids": [
+            2034.876666666667,
+            2051.5433333333335,
+            2068.2100000000005,
+            2084.876666666667
+        ],
+        "virtual_grids": [
+            2018.2100000000003,
+            2101.5433333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095096.8972633,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:20.107055+00:00",
+        "grid_top": 2085.6633333333334,
+        "grid_bottom": 2035.6633333333334,
+        "entity_grids": [
+            2035.6633333333334,
+            2052.33,
+            2068.996666666667,
+            2085.6633333333334
+        ],
+        "virtual_grids": [
+            2018.9966666666667,
+            2102.33
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095098.4657052,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:21.694660+00:00",
+        "grid_top": 2088.05,
+        "grid_bottom": 2038.0500000000002,
+        "entity_grids": [
+            2038.0500000000002,
+            2054.7166666666667,
+            2071.3833333333337,
+            2088.05
+        ],
+        "virtual_grids": [
+            2021.3833333333334,
+            2104.7166666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095100.144763,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:23.248680+00:00",
+        "grid_top": 2086.753333333333,
+        "grid_bottom": 2036.753333333333,
+        "entity_grids": [
+            2036.753333333333,
+            2053.4199999999996,
+            2070.0866666666666,
+            2086.753333333333
+        ],
+        "virtual_grids": [
+            2020.0866666666664,
+            2103.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095101.7282503,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:25.071350+00:00",
+        "grid_top": 2069.0249999999996,
+        "grid_bottom": 2019.0249999999999,
+        "entity_grids": [
+            2019.0249999999999,
+            2035.6916666666664,
+            2052.358333333333,
+            2069.0249999999996
+        ],
+        "virtual_grids": [
+            2002.3583333333333,
+            2085.691666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-27T10:38:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095103.2718763,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:25.876100+00:00",
+        "grid_top": 2016.1733333333336,
+        "grid_bottom": 1966.1733333333336,
+        "entity_grids": [
+            1966.1733333333336,
+            1982.8400000000004,
+            1999.506666666667,
+            2016.1733333333336
+        ],
+        "virtual_grids": [
+            1949.506666666667,
+            2032.8400000000004
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-27T12:00:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095105.0931916,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:26.660514+00:00",
+        "grid_top": 2012.7883333333334,
+        "grid_bottom": 1962.7883333333334,
+        "entity_grids": [
+            1962.7883333333334,
+            1979.4550000000002,
+            1996.1216666666667,
+            2012.7883333333334
+        ],
+        "virtual_grids": [
+            1946.1216666666667,
+            2029.4550000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095105.9105306,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:28.233224+00:00",
+        "grid_top": 2011.175,
+        "grid_bottom": 1961.175,
+        "entity_grids": [
+            1961.175,
+            1977.8416666666667,
+            1994.5083333333332,
+            2011.175
+        ],
+        "virtual_grids": [
+            1944.5083333333332,
+            2027.8416666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095106.6816237,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:29.848622+00:00",
+        "grid_top": 2009.4099999999999,
+        "grid_bottom": 1959.4099999999999,
+        "entity_grids": [
+            1959.4099999999999,
+            1976.0766666666666,
+            1992.743333333333,
+            2009.4099999999999
+        ],
+        "virtual_grids": [
+            1942.743333333333,
+            2026.0766666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095108.255982,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:31.398431+00:00",
+        "grid_top": 2012.4166666666665,
+        "grid_bottom": 1962.4166666666665,
+        "entity_grids": [
+            1962.4166666666665,
+            1979.0833333333333,
+            1995.7499999999998,
+            2012.4166666666665
+        ],
+        "virtual_grids": [
+            1945.7499999999998,
+            2029.0833333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095109.877852,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:33.007061+00:00",
+        "grid_top": 2017.6866666666665,
+        "grid_bottom": 1967.6866666666665,
+        "entity_grids": [
+            1967.6866666666665,
+            1984.3533333333332,
+            2001.0199999999998,
+            2017.6866666666665
+        ],
+        "virtual_grids": [
+            1951.0199999999998,
+            2034.3533333333332
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095111.4202464,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:34.603789+00:00",
+        "grid_top": 2024.1366666666668,
+        "grid_bottom": 1974.1366666666668,
+        "entity_grids": [
+            1974.1366666666668,
+            1990.8033333333335,
+            2007.47,
+            2024.1366666666668
+        ],
+        "virtual_grids": [
+            1957.47,
+            2040.8033333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095113.0323577,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:36.453395+00:00",
+        "grid_top": 2031.6066666666666,
+        "grid_bottom": 1981.6066666666666,
+        "entity_grids": [
+            1981.6066666666666,
+            1998.2733333333333,
+            2014.9399999999998,
+            2031.6066666666666
+        ],
+        "virtual_grids": [
+            1964.9399999999998,
+            2048.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095114.6278813,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:38.347333+00:00",
+        "grid_top": 2046.7416666666666,
+        "grid_bottom": 1996.7416666666666,
+        "entity_grids": [
+            1996.7416666666666,
+            2013.4083333333333,
+            2030.0749999999998,
+            2046.7416666666666
+        ],
+        "virtual_grids": [
+            1980.0749999999998,
+            2063.4083333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095116.485397,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:39.947001+00:00",
+        "grid_top": 2042.4633333333334,
+        "grid_bottom": 1992.4633333333334,
+        "entity_grids": [
+            1992.4633333333334,
+            2009.13,
+            2025.7966666666666,
+            2042.4633333333334
+        ],
+        "virtual_grids": [
+            1975.7966666666666,
+            2059.13
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095118.37023,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:41.948491+00:00",
+        "grid_top": 2025.7233333333334,
+        "grid_bottom": 1975.7233333333334,
+        "entity_grids": [
+            1975.7233333333334,
+            1992.39,
+            2009.0566666666666,
+            2025.7233333333334
+        ],
+        "virtual_grids": [
+            1959.0566666666666,
+            2042.39
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095119.9701061,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:43.498735+00:00",
+        "grid_top": 2029.3283333333334,
+        "grid_bottom": 1979.3283333333334,
+        "entity_grids": [
+            1979.3283333333334,
+            1995.9950000000001,
+            2012.6616666666666,
+            2029.3283333333334
+        ],
+        "virtual_grids": [
+            1962.6616666666666,
+            2045.9950000000001
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095121.9763944,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:44.914332+00:00",
+        "grid_top": 2026.0566666666666,
+        "grid_bottom": 1976.0566666666666,
+        "entity_grids": [
+            1976.0566666666666,
+            1992.7233333333334,
+            2009.3899999999999,
+            2026.0566666666666
+        ],
+        "virtual_grids": [
+            1959.3899999999999,
+            2042.7233333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095123.5220597,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:46.531079+00:00",
+        "grid_top": 2020.19,
+        "grid_bottom": 1970.19,
+        "entity_grids": [
+            1970.19,
+            1986.8566666666668,
+            2003.5233333333333,
+            2020.19
+        ],
+        "virtual_grids": [
+            1953.5233333333333,
+            2036.8566666666668
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095124.9370527,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:48.041477+00:00",
+        "grid_top": 2019.4299999999998,
+        "grid_bottom": 1969.4299999999998,
+        "entity_grids": [
+            1969.4299999999998,
+            1986.0966666666666,
+            2002.763333333333,
+            2019.4299999999998
+        ],
+        "virtual_grids": [
+            1952.763333333333,
+            2036.0966666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095126.553687,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:49.532650+00:00",
+        "grid_top": 2015.5533333333333,
+        "grid_bottom": 1965.5533333333333,
+        "entity_grids": [
+            1965.5533333333333,
+            1982.22,
+            1998.8866666666665,
+            2015.5533333333333
+        ],
+        "virtual_grids": [
+            1948.8866666666665,
+            2032.22
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-29T22:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095128.07089,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:51.905851+00:00",
+        "grid_top": 2033.1916666666666,
+        "grid_bottom": 1983.1916666666666,
+        "entity_grids": [
+            1983.1916666666666,
+            1999.8583333333333,
+            2016.5249999999999,
+            2033.1916666666666
+        ],
+        "virtual_grids": [
+            1966.5249999999999,
+            2049.858333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T03:18:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095129.5672917,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:54.237674+00:00",
+        "grid_top": 2070.0466666666666,
+        "grid_bottom": 2020.0466666666666,
+        "entity_grids": [
+            2020.0466666666666,
+            2036.7133333333334,
+            2053.38,
+            2070.0466666666666
+        ],
+        "virtual_grids": [
+            2003.3799999999999,
+            2086.713333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T07:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095131.9405742,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:55.702080+00:00",
+        "grid_top": 2081.9483333333337,
+        "grid_bottom": 2031.9483333333337,
+        "entity_grids": [
+            2031.9483333333337,
+            2048.6150000000002,
+            2065.281666666667,
+            2081.9483333333337
+        ],
+        "virtual_grids": [
+            2015.281666666667,
+            2098.6150000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095134.2640705,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:57.549942+00:00",
+        "grid_top": 2090.431666666667,
+        "grid_bottom": 2040.4316666666668,
+        "entity_grids": [
+            2040.4316666666668,
+            2057.0983333333334,
+            2073.7650000000003,
+            2090.431666666667
+        ],
+        "virtual_grids": [
+            2023.765,
+            2107.0983333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095135.7291784,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:58:59.109625+00:00",
+        "grid_top": 2075.6066666666666,
+        "grid_bottom": 2025.6066666666666,
+        "entity_grids": [
+            2025.6066666666666,
+            2042.2733333333333,
+            2058.94,
+            2075.6066666666666
+        ],
+        "virtual_grids": [
+            2008.9399999999998,
+            2092.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T19:57:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095137.577769,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:00.836166+00:00",
+        "grid_top": 2053.3883333333333,
+        "grid_bottom": 2003.3883333333333,
+        "entity_grids": [
+            2003.3883333333333,
+            2020.055,
+            2036.7216666666666,
+            2053.3883333333333
+        ],
+        "virtual_grids": [
+            1986.7216666666666,
+            2070.055
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095139.132738,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:02.781260+00:00",
+        "grid_top": 2075.583333333333,
+        "grid_bottom": 2025.583333333333,
+        "entity_grids": [
+            2025.583333333333,
+            2042.2499999999998,
+            2058.9166666666665,
+            2075.583333333333
+        ],
+        "virtual_grids": [
+            2008.9166666666663,
+            2092.2499999999995
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T03:05:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095140.8633206,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:04.633602+00:00",
+        "grid_top": 2087.9766666666665,
+        "grid_bottom": 2037.9766666666665,
+        "entity_grids": [
+            2037.9766666666665,
+            2054.643333333333,
+            2071.31,
+            2087.9766666666665
+        ],
+        "virtual_grids": [
+            2021.3099999999997,
+            2104.643333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095142.8099651,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:06.256315+00:00",
+        "grid_top": 2065.148333333333,
+        "grid_bottom": 2015.148333333333,
+        "entity_grids": [
+            2015.148333333333,
+            2031.8149999999998,
+            2048.4816666666666,
+            2065.148333333333
+        ],
+        "virtual_grids": [
+            1998.4816666666663,
+            2081.8149999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T09:55:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095144.657142,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:07.943430+00:00",
+        "grid_top": 2074.9383333333335,
+        "grid_bottom": 2024.9383333333335,
+        "entity_grids": [
+            2024.9383333333335,
+            2041.6050000000002,
+            2058.271666666667,
+            2074.9383333333335
+        ],
+        "virtual_grids": [
+            2008.2716666666668,
+            2091.605
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T14:28:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095146.2818484,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:09.872548+00:00",
+        "grid_top": 2123.82,
+        "grid_bottom": 2073.82,
+        "entity_grids": [
+            2073.82,
+            2090.4866666666667,
+            2107.1533333333336,
+            2123.82
+        ],
+        "virtual_grids": [
+            2057.1533333333336,
+            2140.4866666666667
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T17:59:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095147.9813788,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T01:59:09.915651+00:00",
+        "grid_top": 2110.1816666666664,
+        "grid_bottom": 2060.1816666666664,
+        "entity_grids": [
+            2060.1816666666664,
+            2076.848333333333,
+            2093.515,
+            2110.1816666666664
+        ],
+        "virtual_grids": [
+            2043.5149999999996,
+            2126.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095149.9005928,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:01:02.773022+00:00",
+        "grid_top": 2184.588333333333,
+        "grid_bottom": 2134.588333333333,
+        "entity_grids": [
+            2134.588333333333,
+            2151.2549999999997,
+            2167.9216666666666,
+            2184.588333333333
+        ],
+        "virtual_grids": [
+            2117.9216666666666,
+            2201.2549999999997
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-24T23:59:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095149.9005928,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:01:05.173286+00:00",
+        "grid_top": 2187.6016666666665,
+        "grid_bottom": 2137.6016666666665,
+        "entity_grids": [
+            2137.6016666666665,
+            2154.268333333333,
+            2170.935,
+            2187.6016666666665
+        ],
+        "virtual_grids": [
+            2120.935,
+            2204.268333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095262.7994304,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:01:06.750829+00:00",
+        "grid_top": 2201.371666666667,
+        "grid_bottom": 2151.371666666667,
+        "entity_grids": [
+            2151.371666666667,
+            2168.0383333333334,
+            2184.7050000000004,
+            2201.371666666667
+        ],
+        "virtual_grids": [
+            2134.7050000000004,
+            2218.0383333333334
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095265.2058663,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:20.071170+00:00",
+        "grid_top": 2187.6016666666665,
+        "grid_bottom": 2137.6016666666665,
+        "entity_grids": [
+            2137.6016666666665,
+            2154.268333333333,
+            2170.935,
+            2187.6016666666665
+        ],
+        "virtual_grids": [
+            2120.935,
+            2204.268333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095336.816303,
         "occupied_long_layers": [
             0
         ],
         "occupied_short_layers": []
     },
     {
-        "timestamp": "2026-04-01T16:03:53.807023+00:00",
-        "grid_top": 2153.7633333333333,
-        "grid_bottom": 2103.7633333333333,
+        "timestamp": "2026-04-02T02:02:21.587988+00:00",
+        "grid_top": 2201.371666666667,
+        "grid_bottom": 2151.371666666667,
         "entity_grids": [
-            2103.7633333333333,
-            2120.43,
-            2137.096666666667,
-            2153.7633333333333
+            2151.371666666667,
+            2168.0383333333334,
+            2184.7050000000004,
+            2201.371666666667
         ],
         "virtual_grids": [
-            2087.096666666667,
-            2170.43
+            2134.7050000000004,
+            2218.0383333333334
         ],
         "daily_reset_count": 0,
         "breakout_triggered": false,
         "breakout_time": null,
         "no_grid_triggered": false,
-        "last_entry_time": 1775059431.9229946,
+        "last_entry_time": 1775095340.0981278,
         "occupied_long_layers": [
             0
         ],
         "occupied_short_layers": []
     },
     {
-        "timestamp": "2026-04-01T16:05:41.068027+00:00",
-        "grid_top": 2153.7216666666664,
-        "grid_bottom": 2103.7216666666664,
+        "timestamp": "2026-04-02T02:02:23.247653+00:00",
+        "grid_top": 2205.5216666666665,
+        "grid_bottom": 2155.5216666666665,
         "entity_grids": [
-            2103.7216666666664,
-            2120.388333333333,
-            2137.055,
-            2153.7216666666664
+            2155.5216666666665,
+            2172.188333333333,
+            2188.855,
+            2205.5216666666665
         ],
         "virtual_grids": [
-            2087.055,
-            2170.388333333333
+            2138.855,
+            2222.188333333333
         ],
         "daily_reset_count": 0,
         "breakout_triggered": false,
         "breakout_time": null,
         "no_grid_triggered": false,
-        "last_entry_time": 1775059539.7829783,
-        "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
+        "last_entry_time": 1775095341.6114388,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
     },
     {
-        "timestamp": "2026-04-01T16:08:54.397636+00:00",
-        "grid_top": 2153.7216666666664,
-        "grid_bottom": 2103.7216666666664,
+        "timestamp": "2026-04-02T02:02:25.025434+00:00",
+        "grid_top": 2193.5183333333334,
+        "grid_bottom": 2143.5183333333334,
         "entity_grids": [
-            2103.7216666666664,
-            2120.388333333333,
-            2137.055,
-            2153.7216666666664
+            2143.5183333333334,
+            2160.185,
+            2176.851666666667,
+            2193.5183333333334
         ],
         "virtual_grids": [
-            2087.055,
-            2170.388333333333
+            2126.851666666667,
+            2210.185
         ],
         "daily_reset_count": 0,
         "breakout_triggered": false,
         "breakout_time": null,
         "no_grid_triggered": false,
-        "last_entry_time": 1775059732.3676586,
+        "last_entry_time": 1775095343.2737515,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:26.744413+00:00",
+        "grid_top": 2192.753333333333,
+        "grid_bottom": 2142.753333333333,
+        "entity_grids": [
+            2142.753333333333,
+            2159.4199999999996,
+            2176.0866666666666,
+            2192.753333333333
+        ],
+        "virtual_grids": [
+            2126.0866666666666,
+            2209.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095345.0639644,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:28.506564+00:00",
+        "grid_top": 2187.4566666666665,
+        "grid_bottom": 2137.4566666666665,
+        "entity_grids": [
+            2137.4566666666665,
+            2154.123333333333,
+            2170.79,
+            2187.4566666666665
+        ],
+        "virtual_grids": [
+            2120.79,
+            2204.123333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095346.7682157,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:30.895800+00:00",
+        "grid_top": 2165.3383333333336,
+        "grid_bottom": 2115.3383333333336,
+        "entity_grids": [
+            2115.3383333333336,
+            2132.005,
+            2148.671666666667,
+            2165.3383333333336
+        ],
+        "virtual_grids": [
+            2098.671666666667,
+            2182.005
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T07:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095348.5409443,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:32.355320+00:00",
+        "grid_top": 2122.1816666666664,
+        "grid_bottom": 2072.1816666666664,
+        "entity_grids": [
+            2072.1816666666664,
+            2088.848333333333,
+            2105.515,
+            2122.1816666666664
+        ],
+        "virtual_grids": [
+            2055.515,
+            2138.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-26T09:31:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095350.9422631,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:32.553029+00:00",
+        "grid_top": 2122.996666666667,
+        "grid_bottom": 2072.996666666667,
+        "entity_grids": [
+            2072.996666666667,
+            2089.6633333333334,
+            2106.3300000000004,
+            2122.996666666667
+        ],
+        "virtual_grids": [
+            2056.3300000000004,
+            2139.6633333333334
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095352.379654,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:34.154769+00:00",
+        "grid_top": 2096.64,
+        "grid_bottom": 2046.6399999999999,
+        "entity_grids": [
+            2046.6399999999999,
+            2063.3066666666664,
+            2079.9733333333334,
+            2096.64
+        ],
+        "virtual_grids": [
+            2029.9733333333331,
+            2113.3066666666664
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095352.5750966,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:35.750317+00:00",
+        "grid_top": 2084.876666666667,
+        "grid_bottom": 2034.876666666667,
+        "entity_grids": [
+            2034.876666666667,
+            2051.5433333333335,
+            2068.2100000000005,
+            2084.876666666667
+        ],
+        "virtual_grids": [
+            2018.2100000000003,
+            2101.5433333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095354.1791565,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:37.251292+00:00",
+        "grid_top": 2085.6633333333334,
+        "grid_bottom": 2035.6633333333334,
+        "entity_grids": [
+            2035.6633333333334,
+            2052.33,
+            2068.996666666667,
+            2085.6633333333334
+        ],
+        "virtual_grids": [
+            2018.9966666666667,
+            2102.33
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095355.7747414,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:38.851531+00:00",
+        "grid_top": 2088.05,
+        "grid_bottom": 2038.0500000000002,
+        "entity_grids": [
+            2038.0500000000002,
+            2054.7166666666667,
+            2071.3833333333337,
+            2088.05
+        ],
+        "virtual_grids": [
+            2021.3833333333334,
+            2104.7166666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095357.2766411,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:40.690722+00:00",
+        "grid_top": 2086.753333333333,
+        "grid_bottom": 2036.753333333333,
+        "entity_grids": [
+            2036.753333333333,
+            2053.4199999999996,
+            2070.0866666666666,
+            2086.753333333333
+        ],
+        "virtual_grids": [
+            2020.0866666666664,
+            2103.4199999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095358.88336,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:42.292777+00:00",
+        "grid_top": 2069.0249999999996,
+        "grid_bottom": 2019.0249999999999,
+        "entity_grids": [
+            2019.0249999999999,
+            2035.6916666666664,
+            2052.358333333333,
+            2069.0249999999996
+        ],
+        "virtual_grids": [
+            2002.3583333333333,
+            2085.691666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-27T10:38:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095360.7300532,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:43.093084+00:00",
+        "grid_top": 2016.1733333333336,
+        "grid_bottom": 1966.1733333333336,
+        "entity_grids": [
+            1966.1733333333336,
+            1982.8400000000004,
+            1999.506666666667,
+            2016.1733333333336
+        ],
+        "virtual_grids": [
+            1949.506666666667,
+            2032.8400000000004
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-27T12:00:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095362.3235388,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:43.882940+00:00",
+        "grid_top": 2012.7883333333334,
+        "grid_bottom": 1962.7883333333334,
+        "entity_grids": [
+            1962.7883333333334,
+            1979.4550000000002,
+            1996.1216666666667,
+            2012.7883333333334
+        ],
+        "virtual_grids": [
+            1946.1216666666667,
+            2029.4550000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095363.1211534,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:45.445238+00:00",
+        "grid_top": 2011.175,
+        "grid_bottom": 1961.175,
+        "entity_grids": [
+            1961.175,
+            1977.8416666666667,
+            1994.5083333333332,
+            2011.175
+        ],
+        "virtual_grids": [
+            1944.5083333333332,
+            2027.8416666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095363.9072402,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:47.116040+00:00",
+        "grid_top": 2009.4099999999999,
+        "grid_bottom": 1959.4099999999999,
+        "entity_grids": [
+            1959.4099999999999,
+            1976.0766666666666,
+            1992.743333333333,
+            2009.4099999999999
+        ],
+        "virtual_grids": [
+            1942.743333333333,
+            2026.0766666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095365.4688005,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:48.583298+00:00",
+        "grid_top": 2012.4166666666665,
+        "grid_bottom": 1962.4166666666665,
+        "entity_grids": [
+            1962.4166666666665,
+            1979.0833333333333,
+            1995.7499999999998,
+            2012.4166666666665
+        ],
+        "virtual_grids": [
+            1945.7499999999998,
+            2029.0833333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095367.1423087,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:50.195209+00:00",
+        "grid_top": 2017.6866666666665,
+        "grid_bottom": 1967.6866666666665,
+        "entity_grids": [
+            1967.6866666666665,
+            1984.3533333333332,
+            2001.0199999999998,
+            2017.6866666666665
+        ],
+        "virtual_grids": [
+            1951.0199999999998,
+            2034.3533333333332
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095368.613678,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:51.796194+00:00",
+        "grid_top": 2024.1366666666668,
+        "grid_bottom": 1974.1366666666668,
+        "entity_grids": [
+            1974.1366666666668,
+            1990.8033333333335,
+            2007.47,
+            2024.1366666666668
+        ],
+        "virtual_grids": [
+            1957.47,
+            2040.8033333333335
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095370.226742,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:53.322116+00:00",
+        "grid_top": 2031.6066666666666,
+        "grid_bottom": 1981.6066666666666,
+        "entity_grids": [
+            1981.6066666666666,
+            1998.2733333333333,
+            2014.9399999999998,
+            2031.6066666666666
+        ],
+        "virtual_grids": [
+            1964.9399999999998,
+            2048.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095371.8215668,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:54.980179+00:00",
+        "grid_top": 2046.7416666666666,
+        "grid_bottom": 1996.7416666666666,
+        "entity_grids": [
+            1996.7416666666666,
+            2013.4083333333333,
+            2030.0749999999998,
+            2046.7416666666666
+        ],
+        "virtual_grids": [
+            1980.0749999999998,
+            2063.4083333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095373.3510695,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:56.530651+00:00",
+        "grid_top": 2042.4633333333334,
+        "grid_bottom": 1992.4633333333334,
+        "entity_grids": [
+            1992.4633333333334,
+            2009.13,
+            2025.7966666666666,
+            2042.4633333333334
+        ],
+        "virtual_grids": [
+            1975.7966666666666,
+            2059.13
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095375.005267,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:02:58.504867+00:00",
+        "grid_top": 2025.7233333333334,
+        "grid_bottom": 1975.7233333333334,
+        "entity_grids": [
+            1975.7233333333334,
+            1992.39,
+            2009.0566666666666,
+            2025.7233333333334
+        ],
+        "virtual_grids": [
+            1959.0566666666666,
+            2042.39
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095376.5609725,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:00.180949+00:00",
+        "grid_top": 2029.3283333333334,
+        "grid_bottom": 1979.3283333333334,
+        "entity_grids": [
+            1979.3283333333334,
+            1995.9950000000001,
+            2012.6616666666666,
+            2029.3283333333334
+        ],
+        "virtual_grids": [
+            1962.6616666666666,
+            2045.9950000000001
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095378.528966,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:01.736403+00:00",
+        "grid_top": 2026.0566666666666,
+        "grid_bottom": 1976.0566666666666,
+        "entity_grids": [
+            1976.0566666666666,
+            1992.7233333333334,
+            2009.3899999999999,
+            2026.0566666666666
+        ],
+        "virtual_grids": [
+            1959.3899999999999,
+            2042.7233333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095380.2073479,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:03.454365+00:00",
+        "grid_top": 2020.19,
+        "grid_bottom": 1970.19,
+        "entity_grids": [
+            1970.19,
+            1986.8566666666668,
+            2003.5233333333333,
+            2020.19
+        ],
+        "virtual_grids": [
+            1953.5233333333333,
+            2036.8566666666668
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095381.7618845,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:05.190149+00:00",
+        "grid_top": 2019.4299999999998,
+        "grid_bottom": 1969.4299999999998,
+        "entity_grids": [
+            1969.4299999999998,
+            1986.0966666666666,
+            2002.763333333333,
+            2019.4299999999998
+        ],
+        "virtual_grids": [
+            1952.763333333333,
+            2036.0966666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095383.4880083,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:07.131863+00:00",
+        "grid_top": 2015.5533333333333,
+        "grid_bottom": 1965.5533333333333,
+        "entity_grids": [
+            1965.5533333333333,
+            1982.22,
+            1998.8866666666665,
+            2015.5533333333333
+        ],
+        "virtual_grids": [
+            1948.8866666666665,
+            2032.22
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-29T22:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095385.2181802,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:08.717907+00:00",
+        "grid_top": 2033.1916666666666,
+        "grid_bottom": 1983.1916666666666,
+        "entity_grids": [
+            1983.1916666666666,
+            1999.8583333333333,
+            2016.5249999999999,
+            2033.1916666666666
+        ],
+        "virtual_grids": [
+            1966.5249999999999,
+            2049.858333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T03:18:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095387.1586697,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:10.271362+00:00",
+        "grid_top": 2070.0466666666666,
+        "grid_bottom": 2020.0466666666666,
+        "entity_grids": [
+            2020.0466666666666,
+            2036.7133333333334,
+            2053.38,
+            2070.0466666666666
+        ],
+        "virtual_grids": [
+            2003.3799999999999,
+            2086.713333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T07:47:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095388.7465916,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:12.512796+00:00",
+        "grid_top": 2081.9483333333337,
+        "grid_bottom": 2031.9483333333337,
+        "entity_grids": [
+            2031.9483333333337,
+            2048.6150000000002,
+            2065.281666666667,
+            2081.9483333333337
+        ],
+        "virtual_grids": [
+            2015.281666666667,
+            2098.6150000000002
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095390.296951,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:14.165594+00:00",
+        "grid_top": 2090.431666666667,
+        "grid_bottom": 2040.4316666666668,
+        "entity_grids": [
+            2040.4316666666668,
+            2057.0983333333334,
+            2073.7650000000003,
+            2090.431666666667
+        ],
+        "virtual_grids": [
+            2023.765,
+            2107.0983333333334
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095392.5411494,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:15.706078+00:00",
+        "grid_top": 2075.6066666666666,
+        "grid_bottom": 2025.6066666666666,
+        "entity_grids": [
+            2025.6066666666666,
+            2042.2733333333333,
+            2058.94,
+            2075.6066666666666
+        ],
+        "virtual_grids": [
+            2008.9399999999998,
+            2092.273333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-03-30T19:57:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095394.194281,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:17.360688+00:00",
+        "grid_top": 2053.3883333333333,
+        "grid_bottom": 2003.3883333333333,
+        "entity_grids": [
+            2003.3883333333333,
+            2020.055,
+            2036.7216666666666,
+            2053.3883333333333
+        ],
+        "virtual_grids": [
+            1986.7216666666666,
+            2070.055
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095395.7339282,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:19.352279+00:00",
+        "grid_top": 2075.583333333333,
+        "grid_bottom": 2025.583333333333,
+        "entity_grids": [
+            2025.583333333333,
+            2042.2499999999998,
+            2058.9166666666665,
+            2075.583333333333
+        ],
+        "virtual_grids": [
+            2008.9166666666663,
+            2092.2499999999995
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T03:05:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095397.388059,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:22.736289+00:00",
+        "grid_top": 2087.9766666666665,
+        "grid_bottom": 2037.9766666666665,
+        "entity_grids": [
+            2037.9766666666665,
+            2054.643333333333,
+            2071.31,
+            2087.9766666666665
+        ],
+        "virtual_grids": [
+            2021.3099999999997,
+            2104.643333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095399.411055,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:25.698199+00:00",
+        "grid_top": 2065.148333333333,
+        "grid_bottom": 2015.148333333333,
+        "entity_grids": [
+            2015.148333333333,
+            2031.8149999999998,
+            2048.4816666666666,
+            2065.148333333333
+        ],
+        "virtual_grids": [
+            1998.4816666666663,
+            2081.8149999999996
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T09:55:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095402.7949927,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:27.790059+00:00",
+        "grid_top": 2074.9383333333335,
+        "grid_bottom": 2024.9383333333335,
+        "entity_grids": [
+            2024.9383333333335,
+            2041.6050000000002,
+            2058.271666666667,
+            2074.9383333333335
+        ],
+        "virtual_grids": [
+            2008.2716666666668,
+            2091.605
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T14:28:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095405.7448485,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:29.760751+00:00",
+        "grid_top": 2123.82,
+        "grid_bottom": 2073.82,
+        "entity_grids": [
+            2073.82,
+            2090.4866666666667,
+            2107.1533333333336,
+            2123.82
+        ],
+        "virtual_grids": [
+            2057.1533333333336,
+            2140.4866666666667
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-03-31T17:59:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095407.826953,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:03:29.825064+00:00",
+        "grid_top": 2110.1816666666664,
+        "grid_bottom": 2060.1816666666664,
+        "entity_grids": [
+            2060.1816666666664,
+            2076.848333333333,
+            2093.515,
+            2110.1816666666664
+        ],
+        "virtual_grids": [
+            2043.5149999999996,
+            2126.848333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095409.8048425,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T02:59:42.011502+00:00",
+        "grid_top": 2172.9300000000003,
+        "grid_bottom": 2122.9300000000003,
+        "entity_grids": [
+            2122.9300000000003,
+            2139.596666666667,
+            2156.263333333334,
+            2172.9300000000003
+        ],
+        "virtual_grids": [
+            2106.263333333334,
+            2189.596666666667
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-01T21:19:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775095409.8048425,
         "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T03:30:01.097150+00:00",
+        "grid_top": 2138.7116666666666,
+        "grid_bottom": 2088.7116666666666,
+        "entity_grids": [
+            2088.7116666666666,
+            2105.378333333333,
+            2122.045,
+            2138.7116666666666
+        ],
+        "virtual_grids": [
+            2072.045,
+            2155.378333333333
+        ],
+        "daily_reset_count": 2,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-02T01:30:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775098782.0454443,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T04:00:02.475505+00:00",
+        "grid_top": 2141.0983333333334,
+        "grid_bottom": 2091.0983333333334,
+        "entity_grids": [
+            2091.0983333333334,
+            2107.765,
+            2124.431666666667,
+            2141.0983333333334
+        ],
+        "virtual_grids": [
+            2074.431666666667,
+            2157.765
+        ],
+        "daily_reset_count": 2,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775100601.1602335,
+        "occupied_long_layers": [],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T04:02:47.000042+00:00",
+        "grid_top": 2140.65,
+        "grid_bottom": 2090.65,
+        "entity_grids": [
+            2090.65,
+            2107.3166666666666,
+            2123.9833333333336,
+            2140.65
+        ],
+        "virtual_grids": [
+            2073.9833333333336,
+            2157.3166666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-04-02T03:27:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775102565.8524942,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": []
+    },
+    {
+        "timestamp": "2026-04-02T05:08:52.381885+00:00",
+        "grid_top": 2119.795,
+        "grid_bottom": 2069.795,
+        "entity_grids": [
+            2069.795,
+            2086.4616666666666,
+            2103.1283333333336,
+            2119.795
+        ],
+        "virtual_grids": [
+            2053.1283333333336,
+            2136.4616666666666
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-04-02T03:37:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775106530.894993,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "total_position_eth": 0.0,
+        "equity": 0.0
+    },
+    {
+        "timestamp": "2026-04-02T06:21:01.200715+00:00",
+        "grid_top": 2062.4666666666667,
+        "grid_bottom": 2042.4666666666667,
+        "entity_grids": [
+            2042.4666666666667,
+            2049.133333333333,
+            2055.8,
+            2062.4666666666667
+        ],
+        "virtual_grids": [
+            2035.8,
+            2069.133333333333
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-02T04:21:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775110486.9360158,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-02T08:00:03.228635+00:00",
+        "grid_top": 2062.66,
+        "grid_bottom": 2042.6599999999999,
+        "entity_grids": [
+            2042.6599999999999,
+            2049.3266666666664,
+            2055.9933333333333,
+            2062.66
+        ],
+        "virtual_grids": [
+            2035.993333333333,
+            2069.3266666666664
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775110861.2265804,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
     }
 ]

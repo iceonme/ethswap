@@ -8,6 +8,10 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
+# 确保必要的目录存在
+os.makedirs(os.path.join(CURRENT_DIR, 'logs'), exist_ok=True)
+os.makedirs(os.path.join(CURRENT_DIR, 'data'), exist_ok=True)
+
 # 配置日志格式 (全系统统一)
 logging.basicConfig(
     level=logging.INFO,
@@ -19,10 +23,6 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger('Boot')
-
-# 确保必要的目录存在
-os.makedirs(os.path.join(CURRENT_DIR, 'logs'), exist_ok=True)
-os.makedirs(os.path.join(CURRENT_DIR, 'data'), exist_ok=True)
 
 # 导入模块
 from strategies.eth_swap_v95 import V95Strategy
@@ -45,7 +45,7 @@ def run_paper_trading():
     api_config = LIVE_CONFIG if LIVE_CONFIG['api_key'] != 'YOUR_REAL_API_KEY' else OKX_CONFIG
     
     # 1. 启动 Dashboard
-    port = 5100
+    port = 5500
     print(f"[1/5] 启动监控面板 (Port: {port})...")
     dashboard = create_dashboard(port=port)
     dashboard.start_background()
