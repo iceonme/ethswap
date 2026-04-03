@@ -73,7 +73,16 @@ function handleDataUpdate(data) {
         }
 
         if (data.account_cash !== undefined && document.getElementById('cashValue')) {
-            document.getElementById('cashValue').textContent = formatNumber(data.account_cash);
+            const cashDisplay = (data.available_cash !== undefined && data.available_cash !== null)
+                ? data.available_cash
+                : data.account_cash;
+            document.getElementById('cashValue').textContent = formatNumber(cashDisplay);
+        }
+        if (data.unrealized_pnl !== undefined && document.getElementById('unrealizedPnlValue')) {
+            const upnl = parseFloat(data.unrealized_pnl);
+            const el = document.getElementById('unrealizedPnlValue');
+            el.textContent = `${upnl > 0 ? '+' : ''}${formatNumber(upnl)} USDT`;
+            el.style.color = upnl >= 0 ? 'var(--profit)' : 'var(--loss)';
         }
     } catch (e) { console.error("Update asset summary failed:", e); }
 
@@ -120,6 +129,7 @@ function handleDataUpdate(data) {
         if (tradeChanged) {
             renderTradeList();
         }
+        calculateTradeStats(window.tradePaginationState.allTrades, data.realized_pnl, data.total_fees);
         
         // 标记补丁
         if (window.tradePaginationState.allTrades && window.tradePaginationState.allTrades.length > 0) {

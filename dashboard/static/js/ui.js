@@ -153,7 +153,7 @@ function renderTradeList() {
     if (!container) return;
 
     const { allTrades, currentPage, pageSize } = window.tradePaginationState;
-    calculateTradeStats(allTrades);
+    calculateTradeStats(allTrades, null, null);
 
     const totalTrades = allTrades.length;
     window.tradePaginationState.totalPages = Math.ceil(totalTrades / pageSize) || 1;
@@ -209,7 +209,7 @@ function updatePaginationUI() {
     }
 }
 
-function calculateTradeStats(trades) {
+function calculateTradeStats(trades, realizedPnlFromServer = null, totalFeesFromServer = null) {
     let wins = 0, losses = 0, totalPnl = 0;
     let winSum = 0, lossSum = 0;
 
@@ -229,17 +229,24 @@ function calculateTradeStats(trades) {
 
     const winRate = (wins + losses > 0) ? (wins / (wins + losses) * 100) : 0;
     const profitRatio = (losses > 0 && wins > 0) ? (winSum / wins) / (lossSum / losses) : (wins > 0 ? 99.9 : 0);
+    const realized = (realizedPnlFromServer !== null && realizedPnlFromServer !== undefined && !Number.isNaN(Number(realizedPnlFromServer)))
+        ? Number(realizedPnlFromServer)
+        : totalPnl;
 
     const wrEl = document.getElementById('winRate');
     const prEl = document.getElementById('profitRatio');
     const tnEl = document.getElementById('tradeNumbers');
     const rpEl = document.getElementById('realizedPnl');
+    const tfEl = document.getElementById('totalFees');
 
     if (wrEl) wrEl.textContent = `${winRate.toFixed(1)}%`;
     if (prEl) prEl.textContent = profitRatio.toFixed(2);
     if (tnEl) tnEl.textContent = `${wins} / ${losses}`;
+    if (tfEl && totalFeesFromServer !== null && totalFeesFromServer !== undefined) {
+        tfEl.textContent = `-${parseFloat(totalFeesFromServer).toFixed(2)} U`;
+    }
     if (rpEl) {
-        rpEl.textContent = `${totalPnl > 0 ? '+' : ''}${totalPnl.toFixed(2)} U`;
-        rpEl.style.color = totalPnl >= 0 ? 'var(--profit)' : 'var(--loss)';
+        rpEl.textContent = `${realized > 0 ? '+' : ''}${realized.toFixed(2)} U`;
+        rpEl.style.color = realized >= 0 ? 'var(--profit)' : 'var(--loss)';
     }
 }

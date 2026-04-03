@@ -33,13 +33,13 @@ class DashboardServer:
         self.app.config['SECRET_KEY'] = 'cts1-secret-key'
         self.app.config['TEMPLATES_AUTO_RELOAD'] = True  # 开启模板自动重载
         
-        # SocketIO (强制使用 threading 模式避开 eventlet 在 Windows 下的兼容性问题)
+        # SocketIO (使用 eventlet 模式以支持 WebSocket)
         self.socketio = SocketIO(self.app, 
                                  cors_allowed_origins="*", 
-                                 async_mode='threading', # Windows下线程模式最稳定
+                                 async_mode='eventlet', 
                                  ping_timeout=10,
                                  ping_interval=5,
-                                 logger=False,           # 禁用内部日志，提高 Werkzeug 3.1 兼容性
+                                 logger=False,           # 关闭底层日志，减少系统日志负担
                                  engineio_logger=False)
         
         # 数据缓存

@@ -1425,5 +1425,24 @@
             "ord_id": "mock_1775092706700",
             "source": "live"
         }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2064.05,
+        "size": 2.0,
+        "quote_amount": 4128.1,
+        "t": 1775198193739,
+        "time": "2026-04-03T06:36:33.739005+00:00",
+        "reason": "exit_long_farthest_L3",
+        "detail": "平多 数量=2.0000 均价=2064.05",
+        "pnl": -116.89404999999992,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775198193739",
+            "source": "live"
+        }
     }
 ]

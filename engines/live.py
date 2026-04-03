@@ -50,12 +50,23 @@ class LiveEngine:
         self._status_callbacks: List[Callable[[Dict], None]] = []
         self._should_restart = False 
         self._pending_intents: Dict[str, Dict] = {} 
+        self.state_snapshot: Dict[str, Any] = {}
         
         self.last_ui_minute = -1 
         
         # 2026-03-28 修复：对于 Paper 模式，加载交易记录后立即重建执行器状态
-        if getattr(self.executor, 'uid', '') == 'PaperAccount' and hasattr(self.executor, 'reconstruct_state'):
-            self.executor.reconstruct_state(self.history._trades)
+        if getattr(self.executor, 'uid', '') == 'PaperAccount':
+            if hasattr(self.executor, 'reconstruct_state'):
+                # 2026-04-03 优先全量重建成交记录，这是最准确的
+                self.executor.reconstruct_state(self.history._trades)
+            
+            # 随后加载快照仅用于恢复策略内部状态（网格等），而不应覆盖现金
+            state_snapshot = getattr(self, 'state_snapshot', None) or self._load_paper_state_snapshot()
+            if hasattr(self.executor, 'apply_account_snapshot'):
+                # 注意：apply_account_snapshot 内部现在应该更小心，不要覆盖已重建的 cash
+                # 或者在此处直接调用策略的恢复逻辑
+                self.strategy.restore_snapshot(state_snapshot)
+                print(f"[引擎] Paper 账户已依交易记录重建，策略状态已从快照恢复")
             
         # 2026-04-01 修复增强版：建立初始资金基准线
         if self.history.initial_total_value and self.history.initial_total_value > 0:
@@ -73,6 +84,17 @@ class LiveEngine:
         self.executor.register_fill_callback(self._on_fill)
         self.data_feed.register_data_callback(self._on_data)
     
+    def _load_paper_state_snapshot(self) -> Dict[str, Any]:
+        state_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'v95_state.json')
+        if not os.path.exists(state_file):
+            return {}
+        try:
+            with open(state_file, 'r', encoding='utf-8') as f:
+                return json.load(f) or {}
+        except Exception as e:
+            print(f"[??] ?? paper ??????: {e}")
+            return {}
+
     def _sync_exchange_orders(self):
         """同步委托单级别的历史记录 (避免扫单导致记录过多)"""
         try:
@@ -158,17 +180,24 @@ class LiveEngine:
     def _get_context(self) -> StrategyContext:
         self.status_svc.update_cache()
         positions = {f"{p.symbol}_{'long' if p.size > 0 else 'short'}": p for p in self.status_svc._cached_positions}
+        meta = {'total_equity': self.status_svc._cached_total_value}
+        if hasattr(self.executor, 'get_account_snapshot'):
+            try:
+                meta.update(self.executor.get_account_snapshot())
+            except Exception:
+                pass
         return StrategyContext(
             timestamp=self._current_time,
             cash=self.status_svc._cached_cash,
             positions=positions,
             current_prices=self._current_prices.copy(),
-            meta={'total_equity': self.status_svc._cached_total_value}
+            meta=meta
         )
     
     def _on_fill(self, fill: FillEvent):
         """处理成交事件：发布事件由订阅者处理"""
-        self.strategy.on_fill(fill)
+        self.status_svc.update_cache(force=True)
+        self.strategy.on_fill(fill, self._get_context())
         
         # 发布成交事件给 HistoryService 和 StatusService (以及 UI 等)
         bus.publish("fill_event", FillEventPayload(fill=fill))
@@ -308,7 +337,8 @@ class LiveEngine:
                         
                     # 2026-03-28 修复：预热阶段使用空持仓，避免策略在回放历史K线时
                     # 基于真实持仓产出虚假的开仓/平仓/拦截信号日志，误导用户判断。
-                    # 预热的目的仅仅是初始化 RSI、网格等内部状态，不应触发任何交易逻辑。
+                    # 2026-04-03 修复：同时显式标记 warmup 模式，避免策略把空持仓当成真实状态，
+                    # 反向清空从 state 快照恢复出的 executor/strategy 持仓。
                     warmup_positions = {}  # 空持仓，防止预热期产出虚假信号
                         
                     for timestamp, row in df.iterrows():
@@ -324,7 +354,8 @@ class LiveEngine:
                             timestamp=timestamp,
                             cash=historical_equity, # 预热期暂用初始值
                             positions=warmup_positions,
-                            current_prices={data.symbol: data.close} # 补全缺失参数，防止 TypeError
+                            current_prices={data.symbol: data.close}, # 补全缺失参数，防止 TypeError
+                            meta={'warmup': True, 'total_equity': historical_equity}
                         )
                         self.strategy.on_data(data, context)
                         

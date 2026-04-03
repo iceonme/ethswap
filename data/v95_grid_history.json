@@ -1,101 +1,5 @@
 [
     {
-        "timestamp": "2026-04-01T16:42:17.119429+00:00",
-        "grid_top": 2152.9283333333333,
-        "grid_bottom": 2102.9283333333333,
-        "entity_grids": [
-            2102.9283333333333,
-            2119.595,
-            2136.2616666666668,
-            2152.9283333333333
-        ],
-        "virtual_grids": [
-            2086.2616666666668,
-            2169.595
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775061731.3789973,
-        "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
-    },
-    {
-        "timestamp": "2026-04-01T16:55:45.047229+00:00",
-        "grid_top": 2154.7166666666667,
-        "grid_bottom": 2104.7166666666667,
-        "entity_grids": [
-            2104.7166666666667,
-            2121.383333333333,
-            2138.05,
-            2154.7166666666667
-        ],
-        "virtual_grids": [
-            2088.05,
-            2171.383333333333
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775062540.4966004,
-        "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
-    },
-    {
-        "timestamp": "2026-04-01T20:00:01.929196+00:00",
-        "grid_top": 2157.475,
-        "grid_bottom": 2107.475,
-        "entity_grids": [
-            2107.475,
-            2124.1416666666664,
-            2140.8083333333334,
-            2157.475
-        ],
-        "virtual_grids": [
-            2090.8083333333334,
-            2174.1416666666664
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775071797.3715336,
-        "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
-    },
-    {
-        "timestamp": "2026-04-02T00:00:01.263728+00:00",
-        "grid_top": 2165.0466666666666,
-        "grid_bottom": 2115.0466666666666,
-        "entity_grids": [
-            2115.0466666666666,
-            2131.713333333333,
-            2148.38,
-            2165.0466666666666
-        ],
-        "virtual_grids": [
-            2098.38,
-            2181.713333333333
-        ],
-        "daily_reset_count": 0,
-        "breakout_triggered": false,
-        "breakout_time": null,
-        "no_grid_triggered": false,
-        "last_entry_time": 1775076763.8344603,
-        "occupied_long_layers": [],
-        "occupied_short_layers": [
-            2
-        ]
-    },
-    {
         "timestamp": "2026-04-02T01:54:28.345861+00:00",
         "grid_top": 2187.6016666666665,
         "grid_bottom": 2137.6016666666665,
@@ -3364,5 +3268,315 @@
         "short_avg_price": 0.0,
         "total_position_eth": 2.0,
         "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-02T12:00:03.775733+00:00",
+        "grid_top": 2053.8633333333332,
+        "grid_bottom": 2033.8633333333332,
+        "entity_grids": [
+            2033.8633333333332,
+            2040.53,
+            2047.1966666666665,
+            2053.8633333333332
+        ],
+        "virtual_grids": [
+            2027.1966666666665,
+            2060.5299999999997
+        ],
+        "daily_reset_count": 1,
+        "breakout_triggered": true,
+        "breakout_time": "2026-04-02T11:36:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775118131.3474448,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-02T16:00:01.031905+00:00",
+        "grid_top": 2050.4733333333334,
+        "grid_bottom": 2022.6633333333332,
+        "entity_grids": [
+            2022.6633333333332,
+            2031.9333333333332,
+            2041.2033333333334,
+            2050.4733333333334
+        ],
+        "virtual_grids": [
+            2013.3933333333332,
+            2059.7433333333333
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-02T15:44:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775131203.8069596,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-02T20:00:20.593234+00:00",
+        "grid_top": 2067.32,
+        "grid_bottom": 2046.6966666666667,
+        "entity_grids": [
+            2046.6966666666667,
+            2053.5711111111113,
+            2060.4455555555555,
+            2067.32
+        ],
+        "virtual_grids": [
+            2039.8222222222223,
+            2074.194444444445
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": true,
+        "breakout_time": "2026-04-02T19:50:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775145601.0883076,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-03T00:00:02.631916+00:00",
+        "grid_top": 2069.2883333333334,
+        "grid_bottom": 2049.2883333333334,
+        "entity_grids": [
+            2049.2883333333334,
+            2055.955,
+            2062.621666666667,
+            2069.2883333333334
+        ],
+        "virtual_grids": [
+            2042.6216666666667,
+            2075.955
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": null,
+        "no_grid_triggered": false,
+        "last_entry_time": 1775168786.3049443,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-03T04:02:45.760409+00:00",
+        "grid_top": 2063.9300000000003,
+        "grid_bottom": 2043.9300000000003,
+        "entity_grids": [
+            2043.9300000000003,
+            2050.596666666667,
+            2057.263333333334,
+            2063.9300000000003
+        ],
+        "virtual_grids": [
+            2037.2633333333335,
+            2070.596666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775188964.4204762,
+        "occupied_long_layers": [
+            -1
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 2121.465,
+        "short_avg_price": 0.0,
+        "total_position_eth": 2.0,
+        "equity": 10249.51
+    },
+    {
+        "timestamp": "2026-04-03T06:36:33.739005+00:00",
+        "grid_top": 2063.9300000000003,
+        "grid_bottom": 2043.9300000000003,
+        "entity_grids": [
+            2043.9300000000003,
+            2050.596666666667,
+            2057.263333333334,
+            2063.9300000000003
+        ],
+        "virtual_grids": [
+            2037.2633333333335,
+            2070.596666666667
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775197783.2777953,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "long_position_eth": 0.0,
+        "short_position_eth": 0.0,
+        "total_position_eth": 0.0,
+        "cash": 10132.61595,
+        "equity": 10132.61595,
+        "unrealized_pnl": 0.0,
+        "realized_pnl": -116.89405000000079,
+        "position_market_value": 0.0,
+        "mark_price": 2064.05
+    },
+    {
+        "timestamp": "2026-04-03T08:00:01.094964+00:00",
+        "grid_top": 2066.423333333333,
+        "grid_bottom": 2046.4233333333332,
+        "entity_grids": [
+            2046.4233333333332,
+            2053.0899999999997,
+            2059.7566666666667,
+            2066.423333333333
+        ],
+        "virtual_grids": [
+            2039.7566666666664,
+            2073.0899999999997
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775197783.2777953,
+        "occupied_long_layers": [],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "long_position_eth": 0.0,
+        "short_position_eth": 0.0,
+        "total_position_eth": 0.0,
+        "cash": 10195.644597166673,
+        "equity": 10195.644597166673,
+        "unrealized_pnl": 0.0,
+        "realized_pnl": 195.6445971666726,
+        "position_market_value": 0.0,
+        "mark_price": 2064.05
+    },
+    {
+        "timestamp": "2026-04-03T08:00:25.509675+00:00",
+        "grid_top": 2066.423333333333,
+        "grid_bottom": 2046.4233333333332,
+        "entity_grids": [
+            2046.4233333333332,
+            2053.0899999999997,
+            2059.7566666666667,
+            2066.423333333333
+        ],
+        "virtual_grids": [
+            2039.7566666666664,
+            2073.0899999999997
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775203222.3543067,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "long_position_eth": 0.0,
+        "short_position_eth": 0.0,
+        "total_position_eth": 0.0,
+        "cash": 10195.644597166673,
+        "equity": 10195.644597166673,
+        "unrealized_pnl": 0.0,
+        "realized_pnl": 195.6445971666726,
+        "position_market_value": 0.0,
+        "mark_price": 2064.05
+    },
+    {
+        "timestamp": "2026-04-03T08:12:59.966330+00:00",
+        "grid_top": 2065.9683333333332,
+        "grid_bottom": 2045.9683333333332,
+        "entity_grids": [
+            2045.9683333333332,
+            2052.6349999999998,
+            2059.3016666666667,
+            2065.9683333333332
+        ],
+        "virtual_grids": [
+            2039.3016666666665,
+            2072.6349999999998
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775203222.3543067,
+        "occupied_long_layers": [
+            0
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "long_position_eth": 0.0,
+        "short_position_eth": 0.0,
+        "total_position_eth": 0.0,
+        "cash": 10195.644597166673,
+        "equity": 10195.644597166673,
+        "unrealized_pnl": 0.0,
+        "realized_pnl": 195.6445971666726,
+        "position_market_value": 0.0,
+        "mark_price": 2064.05
+    },
+    {
+        "timestamp": "2026-04-03T08:21:04.032629+00:00",
+        "grid_top": 2065.73,
+        "grid_bottom": 2045.73,
+        "entity_grids": [
+            2045.73,
+            2052.3966666666665,
+            2059.0633333333335,
+            2065.73
+        ],
+        "virtual_grids": [
+            2039.0633333333333,
+            2072.3966666666665
+        ],
+        "daily_reset_count": 0,
+        "breakout_triggered": false,
+        "breakout_time": "2026-04-03T02:41:00+00:00",
+        "no_grid_triggered": false,
+        "last_entry_time": 1775204456.3123477,
+        "occupied_long_layers": [
+            0,
+            -1
+        ],
+        "occupied_short_layers": [],
+        "long_avg_price": 0.0,
+        "short_avg_price": 0.0,
+        "long_position_eth": 0.0,
+        "short_position_eth": 0.0,
+        "total_position_eth": 0.0,
+        "cash": 10195.644597166673,
+        "equity": 10195.644597166673,
+        "unrealized_pnl": 0.0,
+        "realized_pnl": 195.6445971666726,
+        "position_market_value": 0.0,
+        "mark_price": 2064.05
     }
 ]

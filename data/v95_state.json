@@ -1,26 +1,36 @@
 {
-    "timestamp": "2026-04-02T08:00:03.228635+00:00",
-    "grid_top": 2062.66,
-    "grid_bottom": 2042.6599999999999,
+    "timestamp": "2026-04-03T08:21:04.032629+00:00",
+    "grid_top": 2065.73,
+    "grid_bottom": 2045.73,
     "entity_grids": [
-        2042.6599999999999,
-        2049.3266666666664,
-        2055.9933333333333,
-        2062.66
+        2045.73,
+        2052.3966666666665,
+        2059.0633333333335,
+        2065.73
     ],
     "virtual_grids": [
-        2035.993333333333,
-        2069.3266666666664
+        2039.0633333333333,
+        2072.3966666666665
     ],
-    "daily_reset_count": 1,
+    "daily_reset_count": 0,
     "breakout_triggered": false,
-    "breakout_time": null,
+    "breakout_time": "2026-04-03T02:41:00+00:00",
     "no_grid_triggered": false,
-    "last_entry_time": 1775110861.2265804,
-    "occupied_long_layers": [],
+    "last_entry_time": 1775204456.3123477,
+    "occupied_long_layers": [
+        0,
+        -1
+    ],
     "occupied_short_layers": [],
-    "long_avg_price": 2121.465,
+    "long_avg_price": 0.0,
     "short_avg_price": 0.0,
-    "total_position_eth": 2.0,
-    "equity": 10249.51
+    "long_position_eth": 0.0,
+    "short_position_eth": 0.0,
+    "total_position_eth": 0.0,
+    "cash": 10195.644597166673,
+    "equity": 10195.644597166673,
+    "unrealized_pnl": 0.0,
+    "realized_pnl": 195.6445971666726,
+    "position_market_value": 0.0,
+    "mark_price": 2064.05
 }

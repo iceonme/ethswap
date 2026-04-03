@@ -50,6 +50,9 @@ class StatusService:
             pnl_pct = 0.0
             if initial_balance and initial_balance > 0:
                 pnl_pct = (current_equity - initial_balance) / initial_balance * 100
+            unrealized_pnl = float(getattr(self.executor, 'get_unrealized_pnl', lambda: 0.0)() or 0.0)
+            position_market_value = float(getattr(self.executor, 'get_position_market_value', lambda: 0.0)() or 0.0)
+            realized_pnl = float(getattr(self.executor, 'get_realized_pnl', lambda: current_equity - float(initial_balance or 0.0) - unrealized_pnl)() or 0.0)
                 
             strategy_status = {}
             if hasattr(self.strategy, 'get_status'):
@@ -88,12 +91,17 @@ class StatusService:
                 'total_value': float(current_equity or 0),
                 'initial_balance': initial_balance,
                 'pnl_pct': float(pnl_pct or 0),
+                'realized_pnl': float(realized_pnl or 0),
+                'unrealized_pnl': float(unrealized_pnl or 0),
+                'total_fees': float(getattr(self.executor, 'get_total_fees', lambda: 0)()),
+                'position_market_value': float(position_market_value or 0),
                 'rsi': float(strategy_status.get('rsi', 50) if strategy_status else 50),
                 'strategy': strategy_status,
                 'uid': str(getattr(self.executor, 'uid', 'Unknown')),
                 'positions': pos_map,
                 'total_margin': float(getattr(self.executor, 'get_total_margin', lambda: 0)()),
-                'account_cash': float(self._cached_cash or 0)
+                'account_cash': float(self._cached_cash or 0),
+                'available_cash': float(getattr(self.executor, 'get_available_cash', lambda: self._cached_cash or 0)())
             }
             return status
         except Exception as e:

@@ -138,7 +138,7 @@ class V95Strategy(BaseStrategy):
         """引擎启动时调用"""
         logger.info(f"策略 {self.name} 已启动")
 
-    def on_fill(self, fill_data: Dict[str, Any], context: StrategyContext):
+    def on_fill(self, fill_data: Dict[str, Any], context: Optional[StrategyContext] = None):
         """
         成交回调 — 外部引擎在每笔成交后调用此方法。
         立即同步持仓层级 + 权益快照到 v95_state.json，解决重启后持仓丢失问题。
@@ -151,6 +151,8 @@ class V95Strategy(BaseStrategy):
             long_pos = None
             short_pos = None
             total_eth = 0.0
+            long_position_eth = 0.0
+            short_position_eth = 0.0
 
             if context and hasattr(context, 'positions') and context.positions:
                 for pos in context.positions.values():
@@ -159,22 +161,39 @@ class V95Strategy(BaseStrategy):
                     if pos.size > 1e-8:
                         long_pos = pos
                         total_eth += pos.size
+                        long_position_eth += pos.size
                     elif pos.size < -1e-8:
                         short_pos = pos
                         total_eth += abs(pos.size)
+                        short_position_eth += abs(pos.size)
 
             self._long_avg_price = long_pos.avg_price if long_pos and hasattr(long_pos, 'avg_price') else 0.0
             self._short_avg_price = short_pos.avg_price if short_pos and hasattr(short_pos, 'avg_price') else 0.0
             self._total_position_eth = total_eth
+            self._long_position_eth = long_position_eth
+            self._short_position_eth = short_position_eth
 
             # 2. 从 context 获取当前权益
             equity = 0.0
+            cash = 0.0
+            unrealized_pnl = 0.0
+            realized_pnl = 0.0
+            position_market_value = 0.0
             if context and hasattr(context, 'meta'):
                 equity = context.meta.get('total_equity', 0.0)
+                cash = context.meta.get('cash', 0.0)
+                unrealized_pnl = context.meta.get('unrealized_pnl', 0.0)
+                realized_pnl = context.meta.get('realized_pnl', 0.0)
+                position_market_value = context.meta.get('position_market_value', 0.0)
             elif context and hasattr(context, 'total_value'):
                 equity = context.total_value
 
             self._saved_equity = equity
+            self._saved_cash = cash
+            self._saved_unrealized_pnl = unrealized_pnl
+            self._saved_realized_pnl = realized_pnl
+            self._saved_position_market_value = position_market_value
+            self._saved_mark_price = float(context.current_prices.get(self.symbol, fill_data.filled_price if hasattr(fill_data, 'filled_price') else 0.0)) if context and hasattr(context, 'current_prices') else (float(fill_data.filled_price) if hasattr(fill_data, 'filled_price') else 0.0)
 
             # 3. 权益变化阈值判断（变化 > 10 USD 才写盘，避免频繁 IO）
             equity_delta = abs(equity - self._last_saved_equity) if self._last_saved_equity > 0 else float('inf')
@@ -281,10 +300,11 @@ class V95Strategy(BaseStrategy):
         # 2. 计算指标
         rsi = self.calculate_rsi(self.price_history)
         atr = self.calculate_atr(self.df_history)
-        trend = self.lstm_trend(self.price_history)
+        confidence = self.lstm_confidence(self.price_history)
+        trend = 1 if confidence >= 0.55 else (-1 if confidence <= -0.55 else 0)
 
-        # 3. 动态RSI阈值 (基于趋势强度)
-        self._update_dynamic_rsi_thresholds(atr, current_price, trend)
+        # 3. 动态RSI阈值 (保留原有动态阈值能力，并叠加LSTM置信度门控)
+        self._update_dynamic_rsi_thresholds(atr, current_price, confidence)
 
         # 4. 动态杠杆 (通过 context 传递给引擎)
         self.calculate_dynamic_leverage_for_engine(atr, current_price, context)
@@ -371,14 +391,15 @@ class V95Strategy(BaseStrategy):
              # 在冷却期内，跳过普通交易逻辑，但允许黑天鹅保护信号通过
              if signals:
                  self.last_trade_time = time_now
-                 self._print_enhanced_logs(rsi, current_price, trend, layer, context)
+                 self._print_enhanced_logs(rsi, current_price, trend, confidence, layer, context)
                  return signals
              
-             self._print_enhanced_logs(rsi, current_price, trend, layer, context)
+             self._print_enhanced_logs(rsi, current_price, trend, confidence, layer, context)
              return []
 
 
         # 7. 获取持仓状态 (从 context) 并同步层级占用状态
+        is_warmup = bool(getattr(context, 'meta', {}) and context.meta.get('warmup'))
         has_long = False
         has_short = False
         for pos in context.positions.values():
@@ -387,14 +408,16 @@ class V95Strategy(BaseStrategy):
                 if pos.size < 0: has_short = True
         
         # 自动同步：如果持仓消失，则清空对应的层级占用状态
-        if not has_long:
-            if self.occupied_long_layers:
-                logger.info(f"[同步] 多仓已清空，释放已占用的层级: {list(self.occupied_long_layers)}")
-                self.occupied_long_layers.clear()
-        if not has_short:
-            if self.occupied_short_layers:
-                logger.info(f"[同步] 空仓已清空，释放已占用的层级: {list(self.occupied_short_layers)}")
-                self.occupied_short_layers.clear()
+        # 2026-04-03 修复：warmup 阶段使用的是空持仓 mock context，不能拿来覆盖真实账户状态。
+        if not is_warmup:
+            if not has_long:
+                if self.occupied_long_layers:
+                    logger.info(f"[同步] 多仓已清空，释放已占用的层级: {list(self.occupied_long_layers)}")
+                    self.occupied_long_layers.clear()
+            if not has_short:
+                if self.occupied_short_layers:
+                    logger.info(f"[同步] 空仓已清空，释放已占用的层级: {list(self.occupied_short_layers)}")
+                    self.occupied_short_layers.clear()
 
         # 8. 核心交易逻辑：出场优先 + 区域入场
         # 8.1 统一出场逻辑 (已禁用: 2026-04-01, 与网格层平仓冲突)
@@ -405,7 +428,7 @@ class V95Strategy(BaseStrategy):
         if self.blackswan_level >= 3:
             if signals:
                 self.last_trade_time = time_now
-            self._print_enhanced_logs(rsi, current_price, trend, layer, context)
+            self._print_enhanced_logs(rsi, current_price, trend, confidence, layer, context)
             return signals
 
         # 8.3 入场逻辑 (如果已经触发平项，则跳过本次循环的入场检查，避免同根K线反复摩擦)
@@ -413,21 +436,21 @@ class V95Strategy(BaseStrategy):
             if layer is None:
                 # 预警级以上暂停无网格入场
                 if self.blackswan_level < 1:
-                    entry_signals = self._no_grid_trading(rsi, has_long, has_short, current_price, current_time, trend, context)
+                    entry_signals = self._no_grid_trading(rsi, has_long, has_short, current_price, current_time, trend, confidence, context)
                     signals.extend(entry_signals)
             else:
                 # 正常网格交易 (包含实体层与虚拟层)
-                entry_signals = self._grid_trading(layer, rsi, has_long, has_short, current_price, current_time, trend, context)
+                entry_signals = self._grid_trading(layer, rsi, has_long, has_short, current_price, current_time, trend, confidence, context)
                 signals.extend(entry_signals)
 
         # 更新状态并记录冷却时间（如果有信号）
         if signals:
             self.last_trade_time = time_now
 
-        self._print_enhanced_logs(rsi, current_price, trend, layer, context)
+        self._print_enhanced_logs(rsi, current_price, trend, confidence, layer, context)
         return signals
 
-    def _print_enhanced_logs(self, rsi, current_price, trend, layer, context: StrategyContext):
+    def _print_enhanced_logs(self, rsi, current_price, trend, confidence, layer, context: StrategyContext):
         """打印用户要求的增强型诊断与心跳日志 (每分钟一次)"""
         # 1. 检查是否到达 60 秒间隔
         if not hasattr(self, '_last_heartbeat_time') or (time.time() - self._last_heartbeat_time >= 60):
@@ -442,7 +465,14 @@ class V95Strategy(BaseStrategy):
 
             # 1. 策略诊断内容
             layer_name = f"L{layer}" if layer is not None else "外"
-            diag_msg = f"[策略观察] {now_str} | 价格: {current_price:.2f} | RSI: {rsi:.1f} ({dist}) | 层级: {layer_name} | 网格: {grid_desc}"
+            abs_conf = abs(confidence)
+            if abs_conf >= 0.55:
+                conf_band = "强趋势可开仓"
+            elif abs_conf >= 0.50:
+                conf_band = "观望禁开新仓"
+            else:
+                conf_band = "纯网格均值回归"
+            diag_msg = f"[策略观察] {now_str} | 价格: {current_price:.2f} | RSI: {rsi:.1f} ({dist}) | 置信度: {confidence:+.3f}({conf_band}) | 层级: {layer_name} | 网格: {grid_desc}"
             logger.info(diag_msg)
 
             # 2. 状态摘要
@@ -465,34 +495,53 @@ class V95Strategy(BaseStrategy):
             'rsi': rsi,
             'layer': layer,
             'trend': trend,
+            'confidence': confidence,
             'current_price': current_price
         }
 
-    def _update_dynamic_rsi_thresholds(self, atr: float, price: float, trend: int):
-        """动态RSI阈值：方案A
+    def _update_dynamic_rsi_thresholds(self, atr: float, price: float, confidence: float):
+        """动态RSI阈值：保留原有RSI动态阈值能力，并用LSTM置信度做二次门控。
 
-        只放宽实体层一档，虚拟层保持原严度不变。
-        弱趋势: 实体 35/45/65/75，虚拟 30/80
-        强趋势: 实体 40/50/60/70，虚拟 35/75
+        机制：
+        - abs(confidence) >= 0.55 → 强趋势档，可开新仓
+        - 0.50 <= abs(confidence) < 0.55 → 观望档，不开新仓
+        - abs(confidence) < 0.50 → 纯网格/均值回归档
         """
-        if abs(trend) >= 1:  # 强趋势
-            # 实体层：放宽一档
-            self.rsi_oversold = 40.0
-            self.rsi_overbought = 70.0
-            self.rsi_exit_oversold = 50.0
-            self.rsi_exit_overbought = 60.0
-            # 虚拟层：保持原严度
-            self.virtual_rsi_oversold = 35.0
-            self.virtual_rsi_overbought = 75.0
-        else:  # 弱趋势/震荡
-            # 实体层：放宽一档
-            self.rsi_oversold = 30.0
-            self.rsi_overbought = 80.0
-            self.rsi_exit_oversold = 45.0
-            self.rsi_exit_overbought = 65.0
-            # 虚拟层：保持原严度
-            self.virtual_rsi_oversold = 30.0
-            self.virtual_rsi_overbought = 80.0
+        atr_pct = (atr / price * 100.0) if price > 0 else 0.0
+
+        # 先保留原有“动态”能力：由波动率给出基础阈值
+        base_long = 30.0
+        base_short = 80.0
+        if atr_pct >= 2.5:
+            base_long = 35.0
+            base_short = 75.0
+        elif atr_pct >= 1.5:
+            base_long = 32.0
+            base_short = 78.0
+
+        abs_conf = abs(confidence)
+
+        if abs_conf >= 0.55:
+            self.rsi_oversold = min(base_long + 5.0, 40.0)
+            self.rsi_overbought = max(base_short - 5.0, 70.0)
+            self.rsi_exit_oversold = min(self.rsi_oversold + 10.0, 50.0)
+            self.rsi_exit_overbought = max(self.rsi_overbought - 10.0, 60.0)
+            self.virtual_rsi_oversold = max(self.rsi_oversold - 5.0, 30.0)
+            self.virtual_rsi_overbought = min(self.rsi_overbought + 5.0, 80.0)
+        elif abs_conf >= 0.50:
+            self.rsi_oversold = base_long
+            self.rsi_overbought = base_short
+            self.rsi_exit_oversold = min(base_long + 10.0, 45.0)
+            self.rsi_exit_overbought = max(base_short - 10.0, 65.0)
+            self.virtual_rsi_oversold = max(base_long - 2.0, 30.0)
+            self.virtual_rsi_overbought = min(base_short + 2.0, 80.0)
+        else:
+            self.rsi_oversold = base_long
+            self.rsi_overbought = base_short
+            self.rsi_exit_oversold = min(base_long + 10.0, 45.0)
+            self.rsi_exit_overbought = max(base_short - 10.0, 65.0)
+            self.virtual_rsi_oversold = self.rsi_oversold
+            self.virtual_rsi_overbought = self.rsi_overbought
 
     def _handle_grid_merge(self, context: StrategyContext, current_price: float, trend: int) -> List[Signal]:
         """网格归并：顺势归并保留敞口，逆势止损"""
@@ -533,7 +582,7 @@ class V95Strategy(BaseStrategy):
 
     def _no_grid_trading(self, rsi: float, has_long: bool, has_short: bool,
                          current_price: float, current_time: datetime, trend: int,
-                         context: StrategyContext) -> List[Signal]:
+                         confidence: float, context: StrategyContext) -> List[Signal]:
         """无网格模式：两小时观察期内交易，仅一次，条件写死
 
         触发条件（与原逻辑一致）：
@@ -543,6 +592,23 @@ class V95Strategy(BaseStrategy):
         - 观察期结束计数归零
         """
         signals = []
+        long_positions = [p for p in context.positions.values() if p.symbol == self.symbol and p.size > 1e-8]
+        short_positions = [p for p in context.positions.values() if p.symbol == self.symbol and p.size < -1e-8]
+
+        def _position_level(pos):
+            level = getattr(pos, 'level', None)
+            if level is not None:
+                return level
+            avg_price = getattr(pos, 'avg_price', current_price)
+            return self._get_current_layer(avg_price)
+
+        def _position_in_layer(positions, target_layer):
+            if not positions or target_layer is None:
+                return None
+            for pos in positions:
+                if _position_level(pos) == target_layer:
+                    return pos
+            return None
 
         # 为了避免每秒刷屏，设定 60 秒的节流输出标识
         should_log = False
@@ -568,6 +634,13 @@ class V95Strategy(BaseStrategy):
         if hasattr(self, '_no_grid_triggered_in_breakout') and self._no_grid_triggered_in_breakout:
             if should_log:
                 logger.info(f"无网格交易 | 本观察期已触发过，跳过 | RSI: {rsi:.1f} | 价格: {current_price:.2f}")
+            return signals
+
+        # 置信度观望门控：0.50~0.55 禁止新开仓
+        abs_conf = abs(confidence)
+        if 0.50 <= abs_conf < 0.55:
+            if should_log:
+                logger.info(f"无网格观察 | 置信度观望区，禁止新开仓 | confidence: {confidence:+.3f}")
             return signals
 
         # 获取虚拟层边界
@@ -628,7 +701,7 @@ class V95Strategy(BaseStrategy):
 
     def _grid_trading(self, layer: int, rsi: float, has_long: bool, has_short: bool,
                       current_price: float, current_time: datetime, trend: int,
-                      context: StrategyContext) -> List[Signal]:
+                      confidence: float, context: StrategyContext) -> List[Signal]:
         """按层级拦截逻辑：同层拦截，异层放行"""
         signals = []
 
@@ -709,6 +782,8 @@ class V95Strategy(BaseStrategy):
         # ========== 平仓逻辑结束 ==========
 
         # --- 入场逻辑 ---
+        abs_conf = abs(confidence)
+        allow_new_entry = not (0.50 <= abs_conf < 0.55)
         virtual_long_threshold = self.virtual_rsi_oversold
         virtual_short_threshold = self.virtual_rsi_overbought
 
@@ -747,8 +822,11 @@ class V95Strategy(BaseStrategy):
                         logger.info(f"  [开仓冷却] 距上次开仓仅 {time_now - self.last_entry_time:.0f}秒，跳过")
                     return signals
                 
-                # 黑天鹅拦截
-                if self._is_blackswan_blocked(side_is_buy=True):
+                # 置信度观望门控
+                if not allow_new_entry:
+                    if should_log_intercept:
+                        logger.info(f"  [置信度门控] 当前 confidence={confidence:+.3f}，处于观望区，禁止开多")
+                elif self._is_blackswan_blocked(side_is_buy=True):
                     if should_log_intercept:
                         logger.info(f"  [黑天鹅拦截] 禁止开多 | 级别: {self.blackswan_level}")
                 elif layer == -1:
@@ -791,7 +869,10 @@ class V95Strategy(BaseStrategy):
                         logger.info(f"  [开仓冷却] 距上次开仓仅 {time_now - self.last_entry_time:.0f}秒，跳过")
                     return signals
                 
-                if self._is_blackswan_blocked(side_is_buy=False):
+                if not allow_new_entry:
+                    if should_log_intercept:
+                        logger.info(f"  [置信度门控] 当前 confidence={confidence:+.3f}，处于观望区，禁止开空")
+                elif self._is_blackswan_blocked(side_is_buy=False):
                     if should_log_intercept:
                         logger.info(f"  [黑天鹅拦截] 禁止开空 | 级别: {self.blackswan_level}")
                 elif layer == 3:
@@ -818,8 +899,6 @@ class V95Strategy(BaseStrategy):
                         self.occupied_short_layers.add(layer)
                         logger.info(f"入场信号 | 做空 (层2) | RSI: {rsi:.1f} >= {self.rsi_overbought} | 价格: {current_price:.2f}")
                         self.last_entry_time = time_now
-
-        return signals
 
         return signals
 
@@ -1062,8 +1141,15 @@ class V95Strategy(BaseStrategy):
                 # --- 持仓快照（on_fill 成交后同步写入，重启恢复用） ---
                 'long_avg_price': float(self._long_avg_price) if hasattr(self, '_long_avg_price') and self._long_avg_price else 0.0,
                 'short_avg_price': float(self._short_avg_price) if hasattr(self, '_short_avg_price') and self._short_avg_price else 0.0,
+                'long_position_eth': float(self._long_position_eth) if hasattr(self, '_long_position_eth') and self._long_position_eth else 0.0,
+                'short_position_eth': float(self._short_position_eth) if hasattr(self, '_short_position_eth') and self._short_position_eth else 0.0,
                 'total_position_eth': float(self._total_position_eth) if hasattr(self, '_total_position_eth') and self._total_position_eth else 0.0,
+                'cash': float(self._saved_cash) if hasattr(self, '_saved_cash') else 0.0,
                 'equity': float(self._saved_equity) if hasattr(self, '_saved_equity') and self._saved_equity else 0.0,
+                'unrealized_pnl': float(self._saved_unrealized_pnl) if hasattr(self, '_saved_unrealized_pnl') else 0.0,
+                'realized_pnl': float(self._saved_realized_pnl) if hasattr(self, '_saved_realized_pnl') else 0.0,
+                'position_market_value': float(self._saved_position_market_value) if hasattr(self, '_saved_position_market_value') else 0.0,
+                'mark_price': float(self._saved_mark_price) if hasattr(self, '_saved_mark_price') else 0.0,
             }
 
             # 1. 保存最新状态 (覆盖)
@@ -1093,6 +1179,50 @@ class V95Strategy(BaseStrategy):
         except Exception as e:
             logger.error(f"保存网格状态失败: {e}")
 
+    def restore_snapshot(self, state: Dict[str, Any]):
+        """从对象快照恢复策略状态，不触发写盘"""
+        if not state:
+            return
+            
+        try:
+            self.grid_top = float(state.get('grid_top', 0.0))
+            self.grid_bottom = float(state.get('grid_bottom', 0.0))
+            self.entity_grids = state.get('entity_grids', [])
+            self.virtual_grids = state.get('virtual_grids', [])
+            self.daily_reset_count = state.get('daily_reset_count', 0)
+            self.breakout_triggered = state.get('breakout_triggered', False)
+            bt_str = state.get('breakout_time')
+            if bt_str:
+                try:
+                    self.breakout_time = datetime.fromisoformat(bt_str)
+                except:
+                    self.breakout_time = None
+            self._no_grid_triggered_in_breakout = state.get('no_grid_triggered', False)
+            self.last_entry_time = state.get('last_entry_time', 0.0)
+            self.occupied_long_layers = set(state.get('occupied_long_layers', []))
+            self.occupied_short_layers = set(state.get('occupied_short_layers', []))
+
+            # --- 持仓快照恢复 ---
+            self._long_avg_price = state.get('long_avg_price', 0.0)
+            self._short_avg_price = state.get('short_avg_price', 0.0)
+            self._long_position_eth = state.get('long_position_eth', state.get('total_position_eth', 0.0) if state.get('long_avg_price', 0.0) else 0.0)
+            self._short_position_eth = state.get('short_position_eth', 0.0)
+            self._total_position_eth = state.get('total_position_eth', 0.0)
+            self._saved_equity = state.get('equity', 0.0)
+            self._saved_cash = state.get('cash') if 'cash' in state else None
+            self._saved_unrealized_pnl = state.get('unrealized_pnl', 0.0)
+            self._saved_realized_pnl = state.get('realized_pnl', 0.0)
+            self._saved_position_market_value = state.get('position_market_value', 0.0)
+            self._saved_mark_price = state.get('mark_price', 0.0)
+            if self._saved_cash is None and self._saved_equity:
+                self._saved_cash = self._saved_equity - self._saved_unrealized_pnl
+            self._last_saved_equity = self._saved_equity
+            
+            if self.entity_grids and self.virtual_grids:
+                logger.info(f"[策略] 成功从快照恢复 | 权益: {self._saved_equity:.2f} USD")
+        except Exception as e:
+            logger.error(f"[策略] 恢复快照失败: {e}")
+
     def _load_grid_state(self):
         """从文件加载网格状态"""
         state_file = os.path.join(DATA_DIR, 'v95_state.json')
@@ -1100,36 +1230,31 @@ class V95Strategy(BaseStrategy):
             try:
                 with open(state_file, 'r', encoding='utf-8') as f:
                     state = json.load(f)
-
-                self.grid_top = float(state.get('grid_top', 0.0))
-                self.grid_bottom = float(state.get('grid_bottom', 0.0))
-                self.entity_grids = state.get('entity_grids', [])
-                self.virtual_grids = state.get('virtual_grids', [])
-                self.daily_reset_count = state.get('daily_reset_count', 0)
-                self.breakout_triggered = state.get('breakout_triggered', False)
-                bt_str = state.get('breakout_time')
-                if bt_str:
-                    try:
-                        self.breakout_time = datetime.fromisoformat(bt_str)
-                    except:
-                        self.breakout_time = None
-                self._no_grid_triggered_in_breakout = state.get('no_grid_triggered', False)
-                self.last_entry_time = state.get('last_entry_time', 0.0)
-                self.occupied_long_layers = set(state.get('occupied_long_layers', []))
-                self.occupied_short_layers = set(state.get('occupied_short_layers', []))
-
-                # --- 持仓快照恢复（on_fill 写入的持仓/权益数据） ---
-                self._long_avg_price = state.get('long_avg_price', 0.0)
-                self._short_avg_price = state.get('short_avg_price', 0.0)
-                self._total_position_eth = state.get('total_position_eth', 0.0)
-                self._saved_equity = state.get('equity', 0.0)
-                self._last_saved_equity = self._saved_equity
-
-                if self.entity_grids and self.virtual_grids:
-                    logger.info(f"成功从文件恢复网格状态 | 区间: [{self.grid_bottom:.2f} - {self.grid_top:.2f}]")
-                    logger.info(f"恢复持仓 | long_avg: {self._long_avg_price:.2f} | short_avg: {self._short_avg_price:.2f} | 总ETH: {self._total_position_eth:.4f} | 权益: {self._saved_equity:.2f} USD")
+                self.restore_snapshot(state)
+                # 加载完后打个招呼
+                if self.entity_grids:
+                     logger.info(f"成功从文件加载网格状态 | 区间: [{self.grid_bottom:.2f} - {self.grid_top:.2f}]")
             except Exception as e:
-                logger.error(f"加载网格状态失败: {e}")
+                logger.error(f"直接加载状态文件失败: {e}")
+
+    def get_paper_account_snapshot(self) -> Dict[str, float]:
+        saved_equity = float(getattr(self, '_saved_equity', 0.0) or 0.0)
+        saved_unrealized = float(getattr(self, '_saved_unrealized_pnl', 0.0) or 0.0)
+        saved_cash = getattr(self, '_saved_cash', None)
+        if saved_cash is None and saved_equity:
+            saved_cash = saved_equity - saved_unrealized
+        return {
+            'cash': float(saved_cash or 0.0),
+            'equity': saved_equity,
+            'long_avg_price': float(getattr(self, '_long_avg_price', 0.0) or 0.0),
+            'short_avg_price': float(getattr(self, '_short_avg_price', 0.0) or 0.0),
+            'long_position_eth': float(getattr(self, '_long_position_eth', 0.0) or 0.0),
+            'short_position_eth': float(getattr(self, '_short_position_eth', 0.0) or 0.0),
+            'total_position_eth': float(getattr(self, '_total_position_eth', 0.0) or 0.0),
+            'unrealized_pnl': saved_unrealized,
+            'realized_pnl': float(getattr(self, '_saved_realized_pnl', 0.0) or 0.0),
+            'position_market_value': float(getattr(self, '_saved_position_market_value', 0.0) or 0.0),
+        }
 
     def calculate_grids(self, df: pd.DataFrame, window_hours: int = 6):
         """计算3层网格架构: 实体3层 + 虚拟2层 (分5段采样, 去极值取中间3个平均, ATR动态保底)"""
@@ -1413,19 +1538,30 @@ class V95Strategy(BaseStrategy):
         """保护级以上时暂停网格重置"""
         return self.blackswan_level >= 2
 
-    def lstm_trend(self, price_history: List[float]) -> int:
-        """轻量LSTM趋势判断: -1=做空, 0=中性, 1=做多"""
+    def lstm_confidence(self, price_history: List[float]) -> float:
+        """LSTM置信度: -1.0(极强做空) ~ 0.0(中性) ~ +1.0(极强做多)
+        替代原lstm_trend，用置信度替代二元判断，保留三层档位(高/中/低置信)"""
         if len(price_history) < 60:
-            return 0
+            return 0.0
 
         recent = price_history[-60:]
         returns = np.diff(recent) / recent[:-1]
         momentum = np.mean(returns) * 100
         volatility = np.std(returns) * 100
 
-        if momentum > volatility * 0.5 and momentum > 0.02:
+        if volatility < 0.001:
+            return 0.0
+
+        raw = momentum / (volatility * 2.0)
+        confidence = max(-1.0, min(1.0, raw))
+        return confidence
+
+    def lstm_trend(self, price_history: List[float]) -> int:
+        """轻量LSTM趋势判断(兼容旧接口): -1=做空, 0=中性, 1=做多"""
+        confidence = self.lstm_confidence(price_history)
+        if confidence >= 0.55:
             return 1
-        elif momentum < -volatility * 0.5 and momentum < -0.02:
+        elif confidence <= -0.55:
             return -1
         return 0
 
