@@ -94,8 +94,9 @@ class V95Strategy(BaseStrategy):
         # 统计
         self.trade_count = 0
         self.daily_reset_count = 0
-        self.occupied_long_layers = set()  # 追踪已开单的长仓层级
-        self.occupied_short_layers = set() # 追踪已开单的短仓层级
+        self.layer_positions: Dict[str, Dict[int, Dict[str, Any]]] = {'long': {}, 'short': {}}
+        self.occupied_long_layers = set()  # 追踪已开单的长仓层级（由 layer_positions 派生）
+        self.occupied_short_layers = set() # 追踪已开单的短仓层级（由 layer_positions 派生）
 
         # 状态持久化追踪
         self._last_saved_equity: float = 0.0  # 上次写入的权益值，用于权益变化阈值判断
@@ -133,6 +134,229 @@ class V95Strategy(BaseStrategy):
             logger.info("检测到手动重置指令：将跳过旧状态加载，强制重新计算网格")
 
         logger.info(f"V9.5-Innovation 初始化完成 | 端口: {self.config.get('port', 5090)}")
+
+    def _refresh_occupied_layers(self):
+        self.occupied_long_layers = set(int(layer) for layer, bucket in self.layer_positions.get('long', {}).items() if bucket.get('size', 0.0) > 1e-8)
+        self.occupied_short_layers = set(int(layer) for layer, bucket in self.layer_positions.get('short', {}).items() if bucket.get('size', 0.0) > 1e-8)
+
+    def _layer_tag(self, side: str, layer: int) -> str:
+        if side == 'long':
+            return '正常层' if layer in (-1, 0) else '外挂层'
+        return '正常层' if layer in (2, 3) else '外挂层'
+
+    def _get_layer_bucket(self, side: str, layer: int, create: bool = False) -> Optional[Dict[str, Any]]:
+        side_buckets = self.layer_positions.setdefault(side, {})
+        layer = int(layer)
+        bucket = side_buckets.get(layer)
+        if bucket is None and create:
+            bucket = {'size': 0.0, 'avg_price': 0.0, 'tag': self._layer_tag(side, layer)}
+            side_buckets[layer] = bucket
+        return bucket
+
+    def _add_layer_position(self, side: str, layer: int, size: float, avg_price: float, tag: Optional[str] = None):
+        if size <= 1e-8:
+            return
+        bucket = self._get_layer_bucket(side, layer, create=True)
+        old_size = float(bucket.get('size', 0.0) or 0.0)
+        new_size = old_size + float(size)
+        if new_size <= 1e-8:
+            self.layer_positions.get(side, {}).pop(int(layer), None)
+        else:
+            old_avg = float(bucket.get('avg_price', 0.0) or 0.0)
+            if old_size > 1e-8 and old_avg > 0 and avg_price > 0:
+                bucket['avg_price'] = (old_size * old_avg + float(size) * float(avg_price)) / new_size
+            elif avg_price > 0:
+                bucket['avg_price'] = float(avg_price)
+            bucket['size'] = new_size
+            bucket['tag'] = tag or bucket.get('tag') or self._layer_tag(side, int(layer))
+        self._refresh_occupied_layers()
+
+    def _reduce_layer_position(self, side: str, layer: int, size: float) -> float:
+        if size <= 1e-8:
+            return 0.0
+        bucket = self._get_layer_bucket(side, layer, create=False)
+        if not bucket:
+            return 0.0
+        reduce_size = min(float(size), float(bucket.get('size', 0.0) or 0.0))
+        remain = float(bucket.get('size', 0.0) or 0.0) - reduce_size
+        if remain <= 1e-8:
+            self.layer_positions.get(side, {}).pop(int(layer), None)
+        else:
+            bucket['size'] = remain
+        self._refresh_occupied_layers()
+        return reduce_size
+
+    def _choose_farthest_layer(self, side: str, current_layer: Optional[int]) -> Optional[int]:
+        side_buckets = self.layer_positions.get(side, {})
+        if not side_buckets:
+            return None
+        anchor = current_layer if current_layer is not None else (3 if side == 'long' else 0)
+        return max(
+            side_buckets.keys(),
+            key=lambda layer: (abs(int(layer) - anchor), abs(int(layer)))
+        )
+
+    def _allocate_external_layer(self, side: str) -> int:
+        occupied = set(int(layer) for layer in self.layer_positions.get(side, {}).keys())
+        if side == 'long':
+            layer = -2
+            while layer in occupied:
+                layer -= 1
+            return layer
+        layer = 4
+        while layer in occupied:
+            layer += 1
+        return layer
+
+    def _serialize_layer_positions(self) -> Dict[str, Dict[str, Dict[str, Any]]]:
+        payload: Dict[str, Dict[str, Dict[str, Any]]] = {'long': {}, 'short': {}}
+        for side in ('long', 'short'):
+            for layer, bucket in self.layer_positions.get(side, {}).items():
+                if bucket.get('size', 0.0) <= 1e-8:
+                    continue
+                payload[side][str(int(layer))] = {
+                    'size': float(bucket.get('size', 0.0) or 0.0),
+                    'avg_price': float(bucket.get('avg_price', 0.0) or 0.0),
+                    'tag': bucket.get('tag') or self._layer_tag(side, int(layer))
+                }
+        return payload
+
+    def _deserialize_layer_positions(self, payload: Any) -> Dict[str, Dict[int, Dict[str, Any]]]:
+        data: Dict[str, Dict[int, Dict[str, Any]]] = {'long': {}, 'short': {}}
+        if not isinstance(payload, dict):
+            return data
+        for side in ('long', 'short'):
+            side_payload = payload.get(side, {})
+            if not isinstance(side_payload, dict):
+                continue
+            for raw_layer, raw_bucket in side_payload.items():
+                if not isinstance(raw_bucket, dict):
+                    continue
+                try:
+                    layer = int(raw_layer)
+                    size = float(raw_bucket.get('size', 0.0) or 0.0)
+                    avg_price = float(raw_bucket.get('avg_price', 0.0) or 0.0)
+                except (TypeError, ValueError):
+                    continue
+                if size <= 1e-8:
+                    continue
+                data[side][layer] = {
+                    'size': size,
+                    'avg_price': avg_price,
+                    'tag': raw_bucket.get('tag') or self._layer_tag(side, layer)
+                }
+        return data
+
+    def _extract_fill_meta(self, fill_data: Any) -> Dict[str, Any]:
+        meta = getattr(fill_data, 'meta', None)
+        if isinstance(fill_data, dict):
+            meta = fill_data.get('meta', meta)
+        return meta if isinstance(meta, dict) else {}
+
+    def _extract_fill_layer(self, fill_data: Any) -> Optional[int]:
+        meta = self._extract_fill_meta(fill_data)
+        for key in ('close_layer', 'level'):
+            value = meta.get(key)
+            if value is not None:
+                try:
+                    return int(value)
+                except (TypeError, ValueError):
+                    pass
+
+        reason = str(meta.get('reason', '') or '')
+        if 'layer-1' in reason:
+            return -1
+        if 'layer0' in reason:
+            return 0
+        if 'layer2' in reason:
+            return 2
+        if 'layer3' in reason:
+            return 3
+        if 'no_grid_long_entry' in reason:
+            return -2
+        if 'no_grid_short_entry' in reason:
+            return 4
+
+        marker = '_L'
+        if marker in reason:
+            suffix = reason.rsplit(marker, 1)[-1]
+            digits = []
+            for ch in suffix:
+                if ch in '-0123456789':
+                    digits.append(ch)
+                else:
+                    break
+            if digits:
+                try:
+                    return int(''.join(digits))
+                except ValueError:
+                    return None
+        return None
+
+    def _build_layer_positions_from_context(self, context: Optional[StrategyContext]) -> Dict[str, Dict[int, Dict[str, Any]]]:
+        rebuilt: Dict[str, Dict[int, Dict[str, Any]]] = {'long': {}, 'short': {}}
+        if not context or not hasattr(context, 'positions') or not context.positions:
+            return rebuilt
+
+        for pos in context.positions.values():
+            if pos.symbol != self.symbol or abs(pos.size) < 1e-8:
+                continue
+            side = 'long' if pos.size > 0 else 'short'
+            avg_price = float(getattr(pos, 'avg_price', 0.0) or 0.0)
+            level = getattr(pos, 'level', None)
+            if level is None and avg_price > 0 and self.entity_grids and len(self.entity_grids) >= 4 and len(self.virtual_grids) >= 2:
+                level = self._price_to_layer(avg_price, self.entity_grids, self.virtual_grids)
+            if level is None:
+                level = self._allocate_external_layer(side)
+            layer = int(level)
+            rebuilt[side][layer] = {
+                'size': abs(float(pos.size)),
+                'avg_price': avg_price,
+                'tag': self._layer_tag(side, layer)
+            }
+        return rebuilt
+
+    def _sync_layer_positions_from_context(self, context: Optional[StrategyContext]):
+        rebuilt = self._build_layer_positions_from_context(context)
+        if rebuilt.get('long') or rebuilt.get('short') or not (context and getattr(context, 'positions', None)):
+            self.layer_positions = rebuilt
+        self._refresh_occupied_layers()
+
+    def _remap_layer_positions_after_grid_reset(self):
+        if not self.layer_positions or not self.entity_grids or len(self.entity_grids) < 4 or len(self.virtual_grids) < 2:
+            self._refresh_occupied_layers()
+            return
+
+        remapped: Dict[str, Dict[int, Dict[str, Any]]] = {'long': {}, 'short': {}}
+        for side in ('long', 'short'):
+            buckets = sorted(self.layer_positions.get(side, {}).items(), key=lambda item: item[0])
+            for old_layer, bucket in buckets:
+                size = float(bucket.get('size', 0.0) or 0.0)
+                avg_price = float(bucket.get('avg_price', 0.0) or 0.0)
+                if size <= 1e-8:
+                    continue
+                mapped_layer = self._price_to_layer(avg_price, self.entity_grids, self.virtual_grids) if avg_price > 0 else None
+                if side == 'long' and mapped_layer in (-1, 0):
+                    new_layer = int(mapped_layer)
+                elif side == 'short' and mapped_layer in (2, 3):
+                    new_layer = int(mapped_layer)
+                else:
+                    new_layer = self._allocate_external_layer(side) if not remapped[side] else (
+                        min(remapped[side].keys()) - 1 if side == 'long' else max(remapped[side].keys()) + 1
+                    )
+                    if side == 'long' and new_layer >= -1:
+                        new_layer = self._allocate_external_layer(side)
+                    if side == 'short' and new_layer <= 3:
+                        new_layer = self._allocate_external_layer(side)
+                remapped[side][new_layer] = {
+                    'size': size,
+                    'avg_price': avg_price,
+                    'tag': self._layer_tag(side, new_layer)
+                }
+                if new_layer != old_layer:
+                    logger.info(f"[层级重映射] {side} | {old_layer} -> {new_layer} | size: {size:.4f} | avg: {avg_price:.2f}")
+        self.layer_positions = remapped
+        self._refresh_occupied_layers()
 
     def on_start(self):
         """引擎启动时调用"""
@@ -198,15 +422,32 @@ class V95Strategy(BaseStrategy):
             # 3. 权益变化阈值判断（变化 > 10 USD 才写盘，避免频繁 IO）
             equity_delta = abs(equity - self._last_saved_equity) if self._last_saved_equity > 0 else float('inf')
 
+            fill_meta = self._extract_fill_meta(fill_data)
+            fill_side = str(fill_meta.get('posSide', '') or '').lower()
+            fill_layer = self._extract_fill_layer(fill_data)
+            fill_price = float(getattr(fill_data, 'filled_price', 0.0) or (fill_data.get('filled_price', 0.0) if isinstance(fill_data, dict) else 0.0))
+            fill_size = float(abs(getattr(fill_data, 'filled_size', 0.0) or (fill_data.get('filled_size', 0.0) if isinstance(fill_data, dict) else 0.0)))
+            fill_reason = str(fill_meta.get('reason', '') or '')
+
+            if fill_side in ('long', 'short') and fill_layer is not None and fill_size > 1e-8:
+                if 'entry' in fill_reason or '开' in fill_reason:
+                    self._add_layer_position(fill_side, fill_layer, fill_size, fill_price)
+                elif ('exit' in fill_reason or 'close' in fill_reason or '平' in fill_reason
+                      or 'blackswan' in fill_reason or 'stop_loss' in fill_reason):
+                    reduced = self._reduce_layer_position(fill_side, fill_layer, fill_size)
+                    if reduced + 1e-8 < fill_size:
+                        self._sync_layer_positions_from_context(context)
+                else:
+                    self._sync_layer_positions_from_context(context)
+            else:
+                self._sync_layer_positions_from_context(context)
+
             if equity_delta > 10.0 or self._last_saved_equity == 0.0:
-                # 同步 occupied_layers（以 context 中的实际持仓为准）
-                self._sync_occupied_layers_from_context(context)
                 self._save_grid_state()
                 self._last_saved_equity = equity
                 logger.info(f"[on_fill] 成交同步 | 持仓: {total_eth:.4f} ETH | 权益: {equity:.2f} USD | Δequity: {equity_delta:.2f} | 已保存状态")
             else:
                 # 权益变化小，只同步内存层信息
-                self._sync_occupied_layers_from_context(context)
                 logger.info(f"[on_fill] 成交同步 | 持仓: {total_eth:.4f} ETH | 权益: {equity:.2f} USD | Δequity: {equity_delta:.2f} | 跳过写入")
 
         except Exception as e:
@@ -218,32 +459,7 @@ class V95Strategy(BaseStrategy):
         用于在 on_fill 后纠正层级状态。
         """
         try:
-            if not context or not hasattr(context, 'positions') or not context.positions:
-                return
-            if not self.entity_grids or len(self.entity_grids) < 4:
-                return
-
-            grids = self.entity_grids  # [P0, P1, P2, P3]
-
-            self.occupied_long_layers.clear()
-            self.occupied_short_layers.clear()
-
-            for pos in context.positions.values():
-                if pos.symbol != self.symbol or abs(pos.size) < 1e-8:
-                    continue
-                avg_price = getattr(pos, 'avg_price', 0.0)
-                if avg_price <= 0:
-                    continue
-
-                if pos.size > 0:
-                    layer = self._price_to_layer(avg_price, grids, self.virtual_grids)
-                    if layer is not None:
-                        self.occupied_long_layers.add(layer)
-                else:
-                    layer = self._price_to_layer(avg_price, grids, self.virtual_grids)
-                    if layer is not None:
-                        self.occupied_short_layers.add(layer)
-
+            self._sync_layer_positions_from_context(context)
         except Exception as e:
             logger.warning(f"[_sync_occupied_layers_from_context] 同步层级失败: {e}")
 
@@ -336,32 +552,11 @@ class V95Strategy(BaseStrategy):
             # 执行网格计算 (自适应 6h 或 4h 窗口)
             self.calculate_grids(self.df_history, window_hours=reset_window)
 
-            # 网格重置后，对齐已有仓位到新网格层边界
-            # 规则: 多仓→所在层下边界, 空仓→所在层上边界
-            # 网格外: 多仓→P0, 空仓→P3
+            # 网格重置后，保留可映射的正常层，不可映射仓位迁移到外挂层
             if context.positions and self.entity_grids:
-                grids = self.entity_grids  # [P0, P1, P2, P3]
-                for pos in context.positions.values():
-                    if pos.symbol == self.symbol and abs(pos.size) > 1e-8:
-                        old_price = pos.avg_price
-                        is_long = pos.size > 0
-                        # 找入场价落在哪一层
-                        if old_price < grids[0]:
-                            # 低于P0: 多仓→P0, 空仓→P0(已在最低)
-                            new_price = grids[0]
-                        elif old_price >= grids[-1]:
-                            # 高于P3: 空仓→P3, 多仓→P3(已在最高)
-                            new_price = grids[-1]
-                        else:
-                            # 在网格内, 找所在层
-                            for i in range(len(grids) - 1):
-                                if grids[i] <= old_price < grids[i + 1]:
-                                    new_price = grids[i] if is_long else grids[i + 1]
-                                    break
-                        pos.avg_price = new_price
-                        logger.info(f"仓位对齐 | {'多' if is_long else '空'}仓 | "
-                                   f"旧入场价: {old_price:.2f} -> 新入场价: {new_price:.2f} | "
-                                   f"层边界: {[round(g,2) for g in grids]}")
+                if not self.layer_positions.get('long') and not self.layer_positions.get('short'):
+                    self._sync_layer_positions_from_context(context)
+                self._remap_layer_positions_after_grid_reset()
 
             # 网格重置后，检查当前价格是否仍在虚拟层外
             if len(self.virtual_grids) >= 2:
@@ -413,11 +608,13 @@ class V95Strategy(BaseStrategy):
             if not has_long:
                 if self.occupied_long_layers:
                     logger.info(f"[同步] 多仓已清空，释放已占用的层级: {list(self.occupied_long_layers)}")
-                    self.occupied_long_layers.clear()
+                    self.layer_positions['long'] = {}
+                    self._refresh_occupied_layers()
             if not has_short:
                 if self.occupied_short_layers:
                     logger.info(f"[同步] 空仓已清空，释放已占用的层级: {list(self.occupied_short_layers)}")
-                    self.occupied_short_layers.clear()
+                    self.layer_positions['short'] = {}
+                    self._refresh_occupied_layers()
 
         # 8. 核心交易逻辑：出场优先 + 区域入场
         # 8.1 统一出场逻辑 (已禁用: 2026-04-01, 与网格层平仓冲突)
@@ -667,31 +864,30 @@ class V95Strategy(BaseStrategy):
         no_grid_size = (equity / 5.0) / current_price if current_price > 0 else self.base_position_eth * 0.5
         no_grid_size = min(no_grid_size, 0.6)  # 上限扩大到0.6 ETH（漏网之鱼捡大一点）
 
+        next_long_external = self._allocate_external_layer('long')
+        next_short_external = self._allocate_external_layer('short')
+
         # 下半部做多：跌破虚拟低层 + RSI阈值 + 该区域未开仓
-        # 备注：无网格区域我们定义为一个特殊的层级索引 -2
-        if current_price < virtual_low and rsi <= long_threshold and -2 not in self.occupied_long_layers and not has_short and not _position_in_layer(long_positions, -2):
+        if current_price < virtual_low and rsi <= long_threshold and next_long_external not in self.occupied_long_layers and not has_short and not _position_in_layer(long_positions, next_long_external):
             signals.append(Signal(
                 symbol=self.symbol, side=Side.BUY, size=no_grid_size,
                 price=current_price, timestamp=current_time,
-                meta={'reason': 'no_grid_long_entry', 'posSide': 'long', 'level': -2}
+                meta={'reason': 'no_grid_long_entry', 'posSide': 'long', 'level': next_long_external}
             ))
-            self.occupied_long_layers.add(-2)
             self._no_grid_triggered_in_breakout = True
             self.last_entry_time = time.time()
-            logger.info(f"无网格交易 | 下半部做多 | {trend_name} | RSI: {rsi:.1f} <= {long_threshold:.0f} | 价格: {current_price:.2f} | 观察期剩余: {((2*3600-elapsed)/60):.0f}分钟")
+            logger.info(f"无网格交易 | 下半部做多 | 外挂层: L{next_long_external} | {trend_name} | RSI: {rsi:.1f} <= {long_threshold:.0f} | 价格: {current_price:.2f} | 观察期剩余: {((2*3600-elapsed)/60):.0f}分钟")
 
         # 上半部做空：涨破虚拟高层 + RSI阈值 + 该区域未开仓
-        # 备注：无网格区域我们定义为一个特殊的层级索引 4
-        elif current_price > virtual_high and rsi >= short_threshold and 4 not in self.occupied_short_layers and not has_long and not _position_in_layer(short_positions, 4):
+        elif current_price > virtual_high and rsi >= short_threshold and next_short_external not in self.occupied_short_layers and not has_long and not _position_in_layer(short_positions, next_short_external):
             signals.append(Signal(
                 symbol=self.symbol, side=Side.SELL, size=no_grid_size,
                 price=current_price, timestamp=current_time,
-                meta={'reason': 'no_grid_short_entry', 'posSide': 'short', 'level': 4}
+                meta={'reason': 'no_grid_short_entry', 'posSide': 'short', 'level': next_short_external}
             ))
-            self.occupied_short_layers.add(4)
             self._no_grid_triggered_in_breakout = True
             self.last_entry_time = time.time()
-            logger.info(f"无网格交易 | 上半部做空 | {trend_name} | RSI: {rsi:.1f} >= {short_threshold:.0f} | 价格: {current_price:.2f} | 观察期剩余: {((2*3600-elapsed)/60):.0f}分钟")
+            logger.info(f"无网格交易 | 上半部做空 | 外挂层: L{next_short_external} | {trend_name} | RSI: {rsi:.1f} >= {short_threshold:.0f} | 价格: {current_price:.2f} | 观察期剩余: {((2*3600-elapsed)/60):.0f}分钟")
 
         else:
             if should_log:
@@ -710,75 +906,78 @@ class V95Strategy(BaseStrategy):
         long_positions = [p for p in context.positions.values() if p.symbol == self.symbol and p.size > 1e-8]
         short_positions = [p for p in context.positions.values() if p.symbol == self.symbol and p.size < -1e-8]
 
-        def _position_level(pos):
-            level = getattr(pos, 'level', None)
-            if level is not None:
-                return level
-            return self._get_current_layer(current_price)
-
-        def _pick_farthest_position(positions, current_layer):
-            if not positions:
-                return None
-            return max(
-                positions,
-                key=lambda pos: abs(
-                    (_position_level(pos) if _position_level(pos) is not None else (current_layer or 0))
-                    - (current_layer or 0)
-                )
-            )
-
         def _position_in_layer(positions, target_layer):
             """检查是否存在同向持仓已在目标层级，返回该持仓或None"""
             if not positions or target_layer is None:
                 return None
             for pos in positions:
-                lvl = _position_level(pos)
+                lvl = getattr(pos, 'level', None)
+                if lvl is None:
+                    avg_price = getattr(pos, 'avg_price', current_price)
+                    lvl = self._get_current_layer(avg_price)
                 if lvl == target_layer:
                     return pos
             return None
 
-        # Layer1 中点：上下半层过滤（平多只在上半层，平空只在下半层）
+        # 网格中线/L1缓冲层：L1不再承担开平仓，仅作缓冲观察
         layer1_mid = (self.entity_grids[1] + self.entity_grids[2]) / 2 if self.entity_grids and len(self.entity_grids) >= 4 else 0
+        grid_mid = layer1_mid
 
-        # 平多阈值（超买）：layer1最难平(+10)，layer2中间(+5)，layer3最容易(基准)
-        exit_ob_layer1 = self.rsi_exit_overbought + 10.0
+        # 平多阈值（超买）：layer2中间(+5)，layer3最容易(基准)；L1不再平多
         exit_ob_layer2 = self.rsi_exit_overbought + 5.0
         exit_ob_layer3 = self.rsi_exit_overbought
 
-        # 平空阈值（超卖）：layer1最难平(-10)，layer0中间(-5)，layer-1最容易(基准)
-        exit_os_layer1 = self.rsi_exit_oversold - 10.0
+        # 平空阈值（超卖）：layer0中间(-5)，layer-1最容易(基准)；L1不再平空
         exit_os_layer0 = self.rsi_exit_oversold - 5.0
         exit_os_layerN1 = self.rsi_exit_oversold
 
         eff_layer = layer if layer is not None else (3 if current_price > self.grid_top else 0)
 
-        # 平多检查（layer 1/2/3 或网格外高位）
-        if long_positions and eff_layer in (1, 2, 3):
-            if not (eff_layer == 1 and layer1_mid > 0 and current_price < layer1_mid):  # L1下半层过滤
-                rsi_threshold = exit_ob_layer3 if eff_layer == 3 else (exit_ob_layer2 if eff_layer == 2 else exit_ob_layer1)
-                if rsi >= rsi_threshold:
-                    pos_to_close = _pick_farthest_position(long_positions, eff_layer)
-                    if pos_to_close:
+        # 平多检查（仅 layer 2/3 或网格外高位；L1不再平多）
+        if long_positions and eff_layer in (2, 3):
+            rsi_threshold = exit_ob_layer3 if eff_layer == 3 else exit_ob_layer2
+            if rsi >= rsi_threshold:
+                close_layer = self._choose_farthest_layer('long', eff_layer)
+                close_bucket = self.layer_positions.get('long', {}).get(close_layer) if close_layer is not None else None
+                if close_bucket:
+                    close_size = float(close_bucket.get('size', 0.0) or 0.0)
+                    close_avg_price = float(close_bucket.get('avg_price', 0.0) or 0.0)
+                    estimated_fee = current_price * close_size * 0.0005
+                    gross_profit = (current_price - close_avg_price) * close_size
+                    net_profit = gross_profit - estimated_fee
+                    min_required_profit = estimated_fee * 3.0
+                    if net_profit >= min_required_profit:
                         signals.append(Signal(
-                            symbol=self.symbol, side=Side.SELL, size=abs(pos_to_close.size),
+                            symbol=self.symbol, side=Side.SELL, size=close_size,
                             price=current_price, timestamp=current_time,
-                            meta={'reason': f'exit_long_farthest_L{eff_layer}', 'posSide': 'long'}
+                            meta={'reason': f'exit_long_farthest_L{close_layer}', 'posSide': 'long', 'close_layer': close_layer}
                         ))
-                        logger.info(f"[平仓] 平多(最远层) | RSI: {rsi:.1f} >= {rsi_threshold:.1f} | 平仓: {pos_to_close.size:.4f} ETH | 触发层: L{eff_layer}")
+                        logger.info(f"[平仓] 平多(最远层) | RSI: {rsi:.1f} >= {rsi_threshold:.1f} | 平仓: {close_size:.4f} ETH | 实际平仓层: L{close_layer} | 触发层: L{eff_layer} | 净利保护通过 {net_profit:.2f} >= {min_required_profit:.2f}")
+                    else:
+                        logger.info(f"[平仓拦截] 平多(最远层) | 实际平仓层: L{close_layer} | 触发层: L{eff_layer} | 净利保护未通过 {net_profit:.2f} < {min_required_profit:.2f}")
 
-        # 平空检查（layer -1/0/1 或网格外低位）
-        if short_positions and eff_layer in (-1, 0, 1):
-            if not (eff_layer == 1 and layer1_mid > 0 and current_price > layer1_mid):  # L1上半层过滤
-                rsi_threshold = exit_os_layerN1 if eff_layer == -1 else (exit_os_layer0 if eff_layer == 0 else exit_os_layer1)
-                if rsi <= rsi_threshold:
-                    pos_to_close = _pick_farthest_position(short_positions, eff_layer)
-                    if pos_to_close:
+        # 平空检查（仅 layer -1/0 或网格外低位；L1不再平空）
+        if short_positions and eff_layer in (-1, 0):
+            rsi_threshold = exit_os_layerN1 if eff_layer == -1 else exit_os_layer0
+            if rsi <= rsi_threshold:
+                close_layer = self._choose_farthest_layer('short', eff_layer)
+                close_bucket = self.layer_positions.get('short', {}).get(close_layer) if close_layer is not None else None
+                if close_bucket:
+                    close_size = float(close_bucket.get('size', 0.0) or 0.0)
+                    close_avg_price = float(close_bucket.get('avg_price', 0.0) or 0.0)
+                    estimated_fee = current_price * close_size * 0.0005
+                    gross_profit = (close_avg_price - current_price) * close_size
+                    net_profit = gross_profit - estimated_fee
+                    min_required_profit = estimated_fee * 3.0
+                    if net_profit >= min_required_profit:
                         signals.append(Signal(
-                            symbol=self.symbol, side=Side.BUY, size=abs(pos_to_close.size),
+                            symbol=self.symbol, side=Side.BUY, size=close_size,
                             price=current_price, timestamp=current_time,
-                            meta={'reason': f'exit_short_farthest_L{eff_layer}', 'posSide': 'short'}
+                            meta={'reason': f'exit_short_farthest_L{close_layer}', 'posSide': 'short', 'close_layer': close_layer}
                         ))
-                        logger.info(f"[平仓] 平空(最远层) | RSI: {rsi:.1f} <= {rsi_threshold:.1f} | 平仓: {abs(pos_to_close.size):.4f} ETH | 触发层: L{eff_layer}")
+                        logger.info(f"[平仓] 平空(最远层) | RSI: {rsi:.1f} <= {rsi_threshold:.1f} | 平仓: {close_size:.4f} ETH | 实际平仓层: L{close_layer} | 触发层: L{eff_layer} | 净利保护通过 {net_profit:.2f} >= {min_required_profit:.2f}")
+                    else:
+                        logger.info(f"[平仓拦截] 平空(最远层) | 实际平仓层: L{close_layer} | 触发层: L{eff_layer} | 净利保护未通过 {net_profit:.2f} < {min_required_profit:.2f}")
         # ========== 平仓逻辑结束 ==========
 
         # --- 入场逻辑 ---
@@ -807,22 +1006,27 @@ class V95Strategy(BaseStrategy):
         elif short_pos:
             pos_desc = f"做空 {abs(short_pos.size):.4f} ETH (层级: {list(self.occupied_short_layers)})"
 
-        # 1. 做多 (在层 -1 / 0 低位区域)
+        # 1. 做多（仅 L-1 / L0；且必须进入各自层的下半部）
         if layer in (-1, 0):
-            if has_short:
+            layer_lower_bound = self.virtual_grids[0] if layer == -1 and self.virtual_grids else self.entity_grids[0]
+            layer_upper_bound = self.entity_grids[0] if layer == -1 else self.entity_grids[1]
+            layer_mid = (layer_lower_bound + layer_upper_bound) / 2 if layer_upper_bound > layer_lower_bound else current_price
+
+            if current_price > layer_mid:
+                if should_log_intercept:
+                    logger.info(f"  [位置拦截] 做多需进入层级 {layer} 的下半部 | price={current_price:.2f} > layer_mid={layer_mid:.2f}")
+            elif has_short:
                 if should_log_intercept:
                     logger.info(f"  [拦截开多] 价格 {current_price:.2f} 在做多区，但持有空仓，跳过对冲")
-            elif layer in self.occupied_long_layers or _position_in_layer(long_positions, layer):
+            elif layer in self.occupied_long_layers:
                 if should_log_intercept:
                     logger.info(f"  [拦截开多] 价格 {current_price:.2f} 在层级 {layer}，但该层已开仓，禁止重复加仓")
             else:
-                # 开仓去重：防止短时间内重复开仓
                 if time_now - self.last_entry_time < self.min_entry_interval:
                     if should_log_intercept:
                         logger.info(f"  [开仓冷却] 距上次开仓仅 {time_now - self.last_entry_time:.0f}秒，跳过")
                     return signals
                 
-                # 置信度观望门控
                 if not allow_new_entry:
                     if should_log_intercept:
                         logger.info(f"  [置信度门控] 当前 confidence={confidence:+.3f}，处于观望区，禁止开多")
@@ -830,7 +1034,6 @@ class V95Strategy(BaseStrategy):
                     if should_log_intercept:
                         logger.info(f"  [黑天鹅拦截] 禁止开多 | 级别: {self.blackswan_level}")
                 elif layer == -1:
-                    # 虚拟低层
                     if rsi <= virtual_long_threshold:
                         size = base_size_with_lev
                         signals.append(Signal(
@@ -838,11 +1041,9 @@ class V95Strategy(BaseStrategy):
                             price=current_price, timestamp=current_time,
                             meta={'reason': 'layer-1_long_entry', 'posSide': 'long', 'level': layer}
                         ))
-                        self.occupied_long_layers.add(layer)
                         logger.info(f"入场信号 | 做多 (虚拟低层) | RSI: {rsi:.1f} | 价格: {current_price:.2f}")
                         self.last_entry_time = time_now
                 else:
-                    # 实体低层 (layer 0): RSI <= 35
                     if rsi <= self.rsi_oversold:
                         size = base_size_with_lev
                         signals.append(Signal(
@@ -850,20 +1051,25 @@ class V95Strategy(BaseStrategy):
                             price=current_price, timestamp=current_time,
                             meta={'reason': 'layer0_long_entry', 'posSide': 'long', 'level': layer}
                         ))
-                        self.occupied_long_layers.add(layer)
                         logger.info(f"入场信号 | 做多 (层0) | RSI: {rsi:.1f} <= {self.rsi_oversold} | 价格: {current_price:.2f}")
                         self.last_entry_time = time_now
 
-        # 2. 做空 (在层 2 / 3 高位区域)
+        # 2. 做空（仅 L2 / L3；且必须进入各自层的上半部）
         elif layer in (2, 3):
-            if has_long:
+            layer_lower_bound = self.entity_grids[2] if layer == 3 else self.entity_grids[1]
+            layer_upper_bound = self.virtual_grids[1] if layer == 3 and self.virtual_grids else self.entity_grids[3]
+            layer_mid = (layer_lower_bound + layer_upper_bound) / 2 if layer_upper_bound > layer_lower_bound else current_price
+
+            if current_price < layer_mid:
+                if should_log_intercept:
+                    logger.info(f"  [位置拦截] 做空需进入层级 {layer} 的上半部 | price={current_price:.2f} < layer_mid={layer_mid:.2f}")
+            elif has_long:
                 if should_log_intercept:
                     logger.info(f"  [拦截开空] 价格 {current_price:.2f} 在做空区，但持有多仓，跳过对冲")
-            elif layer in self.occupied_short_layers or _position_in_layer(short_positions, layer):
+            elif layer in self.occupied_short_layers:
                 if should_log_intercept:
                     logger.info(f"  [拦截开空] 价格 {current_price:.2f} 在层级 {layer}，但该层已开仓，禁止重复加仓")
             else:
-                # 开仓去重
                 if time_now - self.last_entry_time < self.min_entry_interval:
                     if should_log_intercept:
                         logger.info(f"  [开仓冷却] 距上次开仓仅 {time_now - self.last_entry_time:.0f}秒，跳过")
@@ -876,7 +1082,6 @@ class V95Strategy(BaseStrategy):
                     if should_log_intercept:
                         logger.info(f"  [黑天鹅拦截] 禁止开空 | 级别: {self.blackswan_level}")
                 elif layer == 3:
-                    # 虚拟高层
                     if rsi >= virtual_short_threshold:
                         size = base_size_with_lev
                         signals.append(Signal(
@@ -884,11 +1089,9 @@ class V95Strategy(BaseStrategy):
                             price=current_price, timestamp=current_time,
                             meta={'reason': 'layer3_short_entry', 'posSide': 'short', 'level': layer}
                         ))
-                        self.occupied_short_layers.add(layer)
                         logger.info(f"入场信号 | 做空 (虚拟高层) | RSI: {rsi:.1f} | 价格: {current_price:.2f}")
                         self.last_entry_time = time_now
                 else:
-                    # 实体高层 (layer 2): RSI >= 75
                     if rsi >= self.rsi_overbought:
                         size = base_size_with_lev
                         signals.append(Signal(
@@ -896,7 +1099,6 @@ class V95Strategy(BaseStrategy):
                             price=current_price, timestamp=current_time,
                             meta={'reason': 'layer2_short_entry', 'posSide': 'short', 'level': layer}
                         ))
-                        self.occupied_short_layers.add(layer)
                         logger.info(f"入场信号 | 做空 (层2) | RSI: {rsi:.1f} >= {self.rsi_overbought} | 价格: {current_price:.2f}")
                         self.last_entry_time = time_now
 
@@ -1138,6 +1340,7 @@ class V95Strategy(BaseStrategy):
                 'last_entry_time': self.last_entry_time,
                 'occupied_long_layers': list(self.occupied_long_layers),
                 'occupied_short_layers': list(self.occupied_short_layers),
+                'layer_positions': self._serialize_layer_positions(),
                 # --- 持仓快照（on_fill 成交后同步写入，重启恢复用） ---
                 'long_avg_price': float(self._long_avg_price) if hasattr(self, '_long_avg_price') and self._long_avg_price else 0.0,
                 'short_avg_price': float(self._short_avg_price) if hasattr(self, '_short_avg_price') and self._short_avg_price else 0.0,
@@ -1199,8 +1402,11 @@ class V95Strategy(BaseStrategy):
                     self.breakout_time = None
             self._no_grid_triggered_in_breakout = state.get('no_grid_triggered', False)
             self.last_entry_time = state.get('last_entry_time', 0.0)
+            self.layer_positions = self._deserialize_layer_positions(state.get('layer_positions', {}))
             self.occupied_long_layers = set(state.get('occupied_long_layers', []))
             self.occupied_short_layers = set(state.get('occupied_short_layers', []))
+            if self.layer_positions.get('long') or self.layer_positions.get('short'):
+                self._refresh_occupied_layers()
 
             # --- 持仓快照恢复 ---
             self._long_avg_price = state.get('long_avg_price', 0.0)
