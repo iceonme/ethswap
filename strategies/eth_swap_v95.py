@@ -1774,21 +1774,21 @@ class V95Strategy(BaseStrategy):
     def check_reset_conditions(self, current_price: float, current_time: datetime) -> Tuple[bool, int]:
         """检查重置条件 (返回: 是否重置, 采样窗口)
         逻辑：
-        1. 不做任何定时强制重置。
-        2. 每日 00:00 (北京时间) 恢复当日 2 次重置配额，不触发数据重扫。
+        1. 北京时间每日 00:00 恢复当日 2 次突破重置配额，不触发数据重扫。
+        2. 北京时间每 4 小时整点只做一次检查：
+           - 价格仍在实体层内 -> 不重置
+           - 价格超出实体层但仍在虚拟层内 -> 触发温和重置，使用 4h 窗口
         3. 价格突破虚拟层 (VH/VL) 后开启 2 小时观察期。
-        4. 2 小时后仍未回归且配额充足 -> 触发一次重置，并使用 4h 窗口重算网格。
+        4. 2 小时后仍未回归且配额充足 -> 触发一次突破重置，并使用 2h 窗口重算网格。
         """
         # --- 1. 北京时间 00:00 恢复配额 ---
-        # 假设服务器时间/K线时间为 UTC，转换为北京时间 (UTC+8)
         cst_time = current_time + timedelta(hours=8)
         current_day = cst_time.date()
 
         if self.last_reset_day != current_day:
             self.last_reset_day = current_day
-            self.daily_reset_count = 0  # 恢复 2 次机会
+            self.daily_reset_count = 0  # 恢复 2 次突破重置机会
             self.breakout_triggered = False
-            # 0点恢复黑天鹅保护
             if self.blackswan_level > 0:
                 logger.info(f"[黑天鹅] ✅0点跨天恢复 | 级别: {self.blackswan_level} → 0")
                 self.blackswan_level = 0
@@ -1799,19 +1799,31 @@ class V95Strategy(BaseStrategy):
         # --- 2. 4小时温和重置检查 (北京时间 0, 4, 8, 12, 16, 20 点) ---
         current_hour = cst_time.hour
         if current_hour % 4 == 0 and self.last_periodic_reset_hour != current_hour:
-            if len(self.df_history) >= 350:
-                self.last_periodic_reset_hour = current_hour
-                logger.info(f"到达 4 小时定期重置点 (北京时间 {current_hour}点) | 触发网格温和重算")
-                # 保护/熔断级在4h重置时自动降级恢复
-                if self.blackswan_level >= 2:
-                    old_lvl = self.blackswan_level
-                    self.blackswan_level = 0
-                    self.blackswan_direction = 0
-                    self.blackswan_halved = False
-                    logger.info(f"[黑天鹅] ✅4h重置恢复 | 级别: {old_lvl} → 0")
-                return True, 6
+            self.last_periodic_reset_hour = current_hour
+            if len(self.df_history) >= 240 and self.entity_grids and len(self.entity_grids) >= 4 and len(self.virtual_grids) >= 2:
+                entity_low = self.entity_grids[0]
+                entity_high = self.entity_grids[-1]
+                virtual_low = self.virtual_grids[0]
+                virtual_high = self.virtual_grids[1]
+
+                in_entity = entity_low <= current_price <= entity_high
+                in_virtual = virtual_low <= current_price <= virtual_high
+
+                if in_entity:
+                    logger.info(f"到达 4 小时检查点 (北京时间 {current_hour}点) | 价格仍在实体层内，不重置")
+                elif in_virtual:
+                    logger.info(f"到达 4 小时检查点 (北京时间 {current_hour}点) | 价格脱离实体层但仍在虚拟层内，触发温和重置")
+                    if self.blackswan_level >= 2:
+                        old_lvl = self.blackswan_level
+                        self.blackswan_level = 0
+                        self.blackswan_direction = 0
+                        self.blackswan_halved = False
+                        logger.info(f"[黑天鹅] ✅4h温和重置恢复 | 级别: {old_lvl} → 0")
+                    return True, 4
+                else:
+                    logger.info(f"到达 4 小时检查点 (北京时间 {current_hour}点) | 价格已在虚拟层外，交由突破观察单独处理")
             else:
-                logger.info(f"到达 4 小时重置时机，但数据量不足 ({len(self.df_history)}/350)，跳过重置")
+                logger.info(f"到达 4 小时检查点，但数据量不足或网格未就绪 ({len(self.df_history)}/240)，跳过温和重置")
 
         # --- 3. 突破重置检查 (维持每日 2 次) ---
         if self.daily_reset_count >= 2:
@@ -1820,8 +1832,6 @@ class V95Strategy(BaseStrategy):
         if len(self.virtual_grids) >= 2:
             lower_bound = self.virtual_grids[0]
             upper_bound = self.virtual_grids[1]
-
-            # 检测是否突破
             is_outside = current_price < lower_bound or current_price > upper_bound
 
             if not self.breakout_triggered:
@@ -1830,20 +1840,17 @@ class V95Strategy(BaseStrategy):
                     self.breakout_time = current_time
                     logger.info(f"警告：价格突破虚拟层 | 价格: {current_price:.2f} | 观察期开始 (2h)")
             else:
-                # 已在观察期内
                 if not is_outside:
-                    # 价格回归，取消观察
                     self.breakout_triggered = False
-                    logger.info(f"价格回归网格内 | 价格: {current_price:.2f} | 观察期取消")
+                    logger.info(f"价格回归虚拟层内 | 价格: {current_price:.2f} | 观察期取消")
                 else:
-                    # 价格持续在外面，检查是否满 2 小时
                     elapsed = (current_time - self.breakout_time).total_seconds()
                     if elapsed >= 2 * 3600:
                         self.breakout_triggered = False
                         self.daily_reset_count += 1
                         self.breakout_reset_count += 1
-                        logger.info(f"观察期满 2 小时未回归 | 触发紧急重置 | 第 {self.daily_reset_count} 次")
-                        return True, 4  # 触发重置，且使用 4 小时窗口
+                        logger.info(f"观察期满 2 小时未回归 | 触发突破重置 | 第 {self.daily_reset_count} 次")
+                        return True, 2  # 突破重置使用最近 2 小时窗口
 
         return False, 6
 
