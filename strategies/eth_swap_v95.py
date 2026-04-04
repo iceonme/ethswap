@@ -1131,16 +1131,16 @@ class V95Strategy(BaseStrategy):
         long_pos = _pick_farthest_position(long_positions, layer)
         short_pos = _pick_farthest_position(short_positions, layer)
 
-        # 阈值配置: 挂钩动态RSI基准值，每层递减固定5 [待确认]
-        # 平多超买: layer1(基准+10) > layer2(基准+5) > layer3(基准)
-        # 平空超卖: layer1(基准-10) < layer0(基准-5) < layer-1(基准)
-        exit_ob_layer1 = self.rsi_exit_overbought + 10.0  # layer1: 最难平
-        exit_ob_layer2 = self.rsi_exit_overbought + 5.0   # layer2: 中间档
-        exit_ob_layer3 = self.rsi_exit_overbought          # layer3: 最容易平
+        # 阈值配置：L1 已退出平仓体系，现按两级结构执行
+        # 平多超买: layer2(基准) < layer3(基准+5) —— 外层更难平
+        # 平空超卖: layer0(基准-5) > layer-1(基准-10) —— 外层更难平
+        exit_ob_layer1 = self.rsi_exit_overbought + 10.0  # layer1: 最难平（仅保留注释对照）
+        exit_ob_layer2 = self.rsi_exit_overbought         # layer2: 内层先平
+        exit_ob_layer3 = self.rsi_exit_overbought + 5.0   # layer3: 外层更难平
 
-        exit_os_layer1 = self.rsi_exit_oversold - 10.0  # layer1: 最难平
-        exit_os_layer0 = self.rsi_exit_oversold - 5.0   # layer0: 中间档
-        exit_os_layerN1 = self.rsi_exit_oversold         # layer-1: 最容易平
+        exit_os_layer1 = self.rsi_exit_oversold - 10.0  # layer1: 最难平（仅保留注释对照）
+        exit_os_layer0 = self.rsi_exit_oversold - 5.0   # layer0: 内层先平
+        exit_os_layerN1 = self.rsi_exit_oversold - 10.0 # layer-1: 外层更难平
 
         # Layer1 中点：上下半层过滤（平多只在上半层，平空只在下半层）
         layer1_mid = (self.entity_grids[1] + self.entity_grids[2]) / 2 if self.entity_grids and len(self.entity_grids) >= 4 else 0
