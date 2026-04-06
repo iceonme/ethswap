@@ -1444,5 +1444,556 @@
             "ord_id": "mock_1775198193739",
             "source": "live"
         }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2052.2,
+        "size": 1.0,
+        "quote_amount": 2052.2,
+        "t": 1775212263780,
+        "time": "2026-04-03T10:31:03.780136+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2052.20",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775212263780",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2074.41,
+        "size": 1.0,
+        "quote_amount": 2074.41,
+        "t": 1775219403171,
+        "time": "2026-04-03T12:30:03.171739+00:00",
+        "reason": "exit_long_farthest_L3",
+        "detail": "平多 数量=1.0000 均价=2074.41",
+        "pnl": 21.172795000000036,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775219403171",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2052.59,
+        "size": 1.0,
+        "quote_amount": 2052.59,
+        "t": 1775220562783,
+        "time": "2026-04-03T12:49:22.783579+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2052.59",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775220562783",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2043.33,
+        "size": 0.6000000000000001,
+        "quote_amount": 1225.998,
+        "t": 1775221733119,
+        "time": "2026-04-03T13:08:53.119035+00:00",
+        "reason": "no_grid_long_entry",
+        "detail": "开多 数量=0.6000 均价=2043.33",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775221733119",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2057.39,
+        "size": 1.6,
+        "quote_amount": 3291.824,
+        "t": 1775250865236,
+        "time": "2026-04-03T21:14:25.236185+00:00",
+        "reason": "exit_long_farthest_L2",
+        "detail": "平多 数量=1.6000 均价=2057.39",
+        "pnl": 26.0287546666666,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775250865236",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2045.24,
+        "size": 1.0,
+        "quote_amount": 2045.24,
+        "t": 1775313666540,
+        "time": "2026-04-04T14:41:06.540486+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2045.24",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775313666540",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2056.52,
+        "size": 1.0,
+        "quote_amount": 2056.52,
+        "t": 1775315341335,
+        "time": "2026-04-04T15:09:01.335057+00:00",
+        "reason": "exit_long_farthest_L0",
+        "detail": "平多 数量=1.0000 均价=2056.52",
+        "pnl": 10.251739999999973,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775315341335",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2060.19,
+        "size": 1.0,
+        "quote_amount": 2060.19,
+        "t": 1775320146386,
+        "time": "2026-04-04T16:29:06.386918+00:00",
+        "reason": "layer2_short_entry",
+        "detail": "开空 数量=1.0000 均价=2060.19",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775320146386",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2062.74,
+        "size": 1.0,
+        "quote_amount": 2062.74,
+        "t": 1775329693380,
+        "time": "2026-04-04T19:08:13.380850+00:00",
+        "reason": "layer3_short_entry",
+        "detail": "开空 数量=1.0000 均价=2062.74",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775329693379",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2069.11,
+        "size": 0.6000000000000001,
+        "quote_amount": 1241.4660000000003,
+        "t": 1775329908052,
+        "time": "2026-04-04T19:11:48.052445+00:00",
+        "reason": "no_grid_short_entry",
+        "detail": "开空 数量=0.6000 均价=2069.11",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775329908051",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "平空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2053.8,
+        "size": 1.0,
+        "quote_amount": 2053.8,
+        "t": 1775354531472,
+        "time": "2026-04-05T02:02:11.472511+00:00",
+        "reason": "exit_short_farthest_L5",
+        "detail": "平空 数量=1.0000 均价=2053.80",
+        "pnl": 8.4023307692308,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775354531471",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "平空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2054.21,
+        "size": 0.6000000000000001,
+        "quote_amount": 1232.5260000000003,
+        "t": 1775354592270,
+        "time": "2026-04-05T02:03:12.270131+00:00",
+        "reason": "exit_short_farthest_L3",
+        "detail": "平空 数量=0.6000 均价=2054.21",
+        "pnl": 4.7952754615385675,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775354592270",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "平空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2054.4,
+        "size": 1.0,
+        "quote_amount": 2054.4,
+        "t": 1775354780617,
+        "time": "2026-04-05T02:06:20.617587+00:00",
+        "reason": "exit_short_farthest_L2",
+        "detail": "平空 数量=1.0000 均价=2054.40",
+        "pnl": 7.802030769230889,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775354780617",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2051.22,
+        "size": 1.0,
+        "quote_amount": 2051.22,
+        "t": 1775366416589,
+        "time": "2026-04-05T05:20:16.589828+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2051.22",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775366416589",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2044.55,
+        "size": 1.0,
+        "quote_amount": 2044.55,
+        "t": 1775369144048,
+        "time": "2026-04-05T06:05:44.048668+00:00",
+        "reason": "layer-1_long_entry",
+        "detail": "开多 数量=1.0000 均价=2044.55",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775369144048",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2037.45,
+        "size": 0.6000000000000001,
+        "quote_amount": 1222.4700000000003,
+        "t": 1775369398557,
+        "time": "2026-04-05T06:09:58.557376+00:00",
+        "reason": "no_grid_long_entry",
+        "detail": "开多 数量=0.6000 均价=2037.45",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775369398557",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2028.8,
+        "size": 1.0,
+        "quote_amount": 2028.8,
+        "t": 1775392419158,
+        "time": "2026-04-05T12:33:39.158133+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2028.80",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775392419158",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2023.05,
+        "size": 1.0,
+        "quote_amount": 2023.05,
+        "t": 1775392507266,
+        "time": "2026-04-05T12:35:07.266373+00:00",
+        "reason": "layer-1_long_entry",
+        "detail": "开多 数量=1.0000 均价=2023.05",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775392507266",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2068.21,
+        "size": 1.0,
+        "quote_amount": 2068.21,
+        "t": 1775417044128,
+        "time": "2026-04-05T19:24:04.128654+00:00",
+        "reason": "exit_long_farthest_L-7",
+        "detail": "平多 数量=1.0000 均价=2068.21",
+        "pnl": 30.199808043478196,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775417044128",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2068.27,
+        "size": 1.0,
+        "quote_amount": 2068.27,
+        "t": 1775417104888,
+        "time": "2026-04-05T19:25:04.888861+00:00",
+        "reason": "exit_long_farthest_L-6",
+        "detail": "平多 数量=1.0000 均价=2068.27",
+        "pnl": 30.259778043478143,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775417104888",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2072.31,
+        "size": 0.6000000000000001,
+        "quote_amount": 1243.3860000000002,
+        "t": 1775421453812,
+        "time": "2026-04-05T20:37:33.812517+00:00",
+        "reason": "exit_long_farthest_L-5",
+        "detail": "平多 数量=0.6000 均价=2072.31",
+        "pnl": 20.578654826086865,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775421453812",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2071.14,
+        "size": 1.0,
+        "quote_amount": 2071.14,
+        "t": 1775421514437,
+        "time": "2026-04-05T20:38:34.437418+00:00",
+        "reason": "exit_long_farthest_L-1",
+        "detail": "平多 数量=1.0000 均价=2071.14",
+        "pnl": 33.12834304347803,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775421514436",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2070.78,
+        "size": 1.0,
+        "quote_amount": 2070.78,
+        "t": 1775421575170,
+        "time": "2026-04-05T20:39:35.170829+00:00",
+        "reason": "exit_long_farthest_L0",
+        "detail": "平多 数量=1.0000 均价=2070.78",
+        "pnl": 32.76852304347836,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775421575170",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2071.74,
+        "size": 1.0,
+        "quote_amount": 2071.74,
+        "t": 1775421635825,
+        "time": "2026-04-05T20:40:35.825335+00:00",
+        "reason": "layer3_short_entry",
+        "detail": "开空 数量=1.0000 均价=2071.74",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775421635825",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "平空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2057.21,
+        "size": 1.0,
+        "quote_amount": 2057.21,
+        "t": 1775424457908,
+        "time": "2026-04-05T21:27:37.908007+00:00",
+        "reason": "exit_short_farthest_L3",
+        "detail": "平空 数量=1.0000 均价=2057.21",
+        "pnl": 13.501394999999745,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775424457908",
+            "source": "live"
+        }
+    },
+    {
+        "type": "BUY",
+        "action": "开多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2051.32,
+        "size": 1.0,
+        "quote_amount": 2051.32,
+        "t": 1775427214401,
+        "time": "2026-04-05T22:13:34.401591+00:00",
+        "reason": "layer0_long_entry",
+        "detail": "开多 数量=1.0000 均价=2051.32",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775427214401",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "平多",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2068.48,
+        "size": 1.0,
+        "quote_amount": 2068.48,
+        "t": 1775429049846,
+        "time": "2026-04-05T22:44:09.846533+00:00",
+        "reason": "exit_long_farthest_L0",
+        "detail": "平多 数量=1.0000 均价=2068.48",
+        "pnl": 16.125759999999854,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775429049846",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2073.79,
+        "size": 1.0,
+        "quote_amount": 2073.79,
+        "t": 1775429129696,
+        "time": "2026-04-05T22:45:29.696469+00:00",
+        "reason": "layer3_short_entry",
+        "detail": "开空 数量=1.0000 均价=2073.79",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775429129696",
+            "source": "live"
+        }
+    },
+    {
+        "type": "SELL",
+        "action": "开空",
+        "symbol": "ETH-USDT-SWAP",
+        "price": 2112.83,
+        "size": 0.6000000000000001,
+        "quote_amount": 1267.698,
+        "t": 1775430915579,
+        "time": "2026-04-05T23:15:15.579641+00:00",
+        "reason": "no_grid_short_entry",
+        "detail": "开空 数量=0.6000 均价=2112.83",
+        "pnl": 0.0,
+        "margin": null,
+        "meta": {
+            "trade_id": null,
+            "ord_id": "mock_1775430915579",
+            "source": "live"
+        }
     }
 ]
